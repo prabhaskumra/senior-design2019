@@ -3,4 +3,3 @@ Team 3: AR Application
 Name				Email
 ====================================================
 Kevin Yamamura		leek26@unlv.nevada.edu
-Bryan Lubay         lubayb1@unlv.nevada.edu
