@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Search</string>
+
+
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="button">Button</string>
+</resources>
