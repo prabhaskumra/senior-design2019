@@ -1,3 +1,4 @@
+/* Bryan test commit comment */
 package com.example.search;
 
 import android.annotation.SuppressLint;
@@ -90,6 +91,7 @@ public class FullscreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_fullscreen);
+
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
