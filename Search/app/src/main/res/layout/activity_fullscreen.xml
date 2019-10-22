@@ -41,23 +41,24 @@
 
         </LinearLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/Options"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:src="@drawable/ic_menu_manage"
 
-            />
+            android:text="@string/options" />
 
         <Button
             android:id="@+id/help"
 
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="230dp"
-           />
-
+            android:layout_height="68dp"
+            android:layout_marginStart="250dp"
+            android:text="@string/help" />
 
 
     </FrameLayout>
