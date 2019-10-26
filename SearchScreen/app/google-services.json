@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "404080071910",
+    "firebase_url": "https://searchscreen-a8ec0.firebaseio.com",
+    "project_id": "searchscreen-a8ec0",
+    "storage_bucket": "searchscreen-a8ec0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404080071910:android:084203e2f89d84c5c11727",
+        "android_client_info": {
+          "package_name": "com.example.searchscreen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404080071910-d41g6n25nc16q2lpnhq6c3jbreh93qhf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnNlIMcqu7Zov8KEZcPhBaQVokv3fWNSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404080071910-d41g6n25nc16q2lpnhq6c3jbreh93qhf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
