@@ -5,8 +5,13 @@
     <string name="tool_tip">tool_tip</string>
     <string name="function_menu">function_menu</string>
 
-    
+
+    <!-- strings for the copy page -->
+
     <string name="search_text_button">Search Text</string>
     <string name="image_for_textrec">Image for Text Recognition </string>
     <string name="text_from_image">Text From Image </string>
+
+    <!-- strings for the find page -->
+
 </resources>
