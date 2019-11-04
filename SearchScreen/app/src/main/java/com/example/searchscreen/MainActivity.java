@@ -29,4 +29,7 @@ public class MainActivity extends AppCompatActivity {
         frameLayout.addView(showCamera);
 
     }
+
+
+
 }

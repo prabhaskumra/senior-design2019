@@ -10,6 +10,18 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
+<!--    <uses-feature android:name="android.hardware.Camera"-->
+<!--                  android:required="true" />-->
+
+<!--&lt;!&ndash;    permission to write on external drive&ndash;&gt;-->
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+
+
+
+
+
+<!--    djlkfjsdlkjflkadjsklfjadslkjfk;ladsjfl;kasjdkl;fasdfo;j-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
