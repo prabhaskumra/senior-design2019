@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_find"
+            android:icon="@drawable/ic_find_activity"
+            android:title="Find" />
+        <item
+            android:id="@+id/nav_word_search"
+            android:icon="@drawable/ic_word_search"
+            android:title="Word Search" />
+        <item
+            android:id="@+id/nav_app_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings" />
+    </group>
+
+    <item android:title="Misc Actions">
+        <menu>
+            <item
+                android:id="@+id/nav_activity_settings"
+                android:icon="@drawable/ic_activity_settings"
+                android:title="Function Settings" />
+        </menu>
+    </item>
+
+</menu>
