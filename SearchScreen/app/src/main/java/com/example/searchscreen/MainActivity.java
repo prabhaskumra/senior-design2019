@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 //         open the camera
         camera = Camera.open();
-        
+
 
 
         showCamera = new ShowCamera(this, camera);
