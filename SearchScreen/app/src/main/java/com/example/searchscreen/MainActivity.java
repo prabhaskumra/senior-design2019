@@ -13,16 +13,17 @@ import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity {
 
     Camera camera;
 
-    FrameLayout frameLayout;
+    public static FrameLayout frameLayout;
     ShowCamera showCamera;
 
     // vars for settings menu
     public static RecyclerView settingsView, translateSettings, findSettings, text_to_speech_Settings;
-    public boolean settingsOpen = false;
+    public static boolean settingsOpen = false;
     public ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
 
@@ -33,36 +34,43 @@ public class MainActivity extends AppCompatActivity {
         frameLayout = (FrameLayout)findViewById(R.id.frameLayout2);
 
         // open the camera
-
         camera = Camera.open();
-
         showCamera = new ShowCamera(this, camera);
         frameLayout.addView(showCamera);
 
-        // stuff for settings menu
         initImageBitmaps();
         settingsView.setVisibility(View.INVISIBLE);
+
+        // stuff for settings menu
         ImageButton settingsButton = findViewById(R.id.app_settings);
+        ImageButton functionButton = findViewById(R.id.function_menu);
+        ImageButton tutorialButton = findViewById(R.id.tool_tip);
+        ImageButton backToCameraButton = findViewById(R.id.back_to_camera);
+
+        backToCameraButton.setVisibility(View.INVISIBLE);
+
         settingsButton.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            if (!settingsOpen){
-                settingsOpen = true;
-                frameLayout.setVisibility(View.INVISIBLE);
-                settingsView.setVisibility(View.VISIBLE);
+            @Override
+            public void onClick(View v){
+                if (!settingsOpen){
+                    settingsOpen = true;
+                    frameLayout.setVisibility(View.INVISIBLE);
+                    settingsView.setVisibility(View.VISIBLE);
+                }
+                else{
+                    settingsOpen = false;
+                    frameLayout.setVisibility(View.VISIBLE);
+                    settingsView.setVisibility(View.INVISIBLE);
+                }
             }
-            else{
-                settingsOpen = false;
-                frameLayout.setVisibility(View.VISIBLE);
-                settingsView.setVisibility(View.INVISIBLE);
-            }
-        }
-    });
+        });
 
     }
+
+
+
+
     private void initImageBitmaps(){
-
-
         mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
         mNames.add("Find");
 
@@ -81,6 +89,4 @@ public class MainActivity extends AppCompatActivity {
         settingsView.setAdapter(adapter);
         settingsView.setLayoutManager(new LinearLayoutManager(this));
     }
-
-
 }

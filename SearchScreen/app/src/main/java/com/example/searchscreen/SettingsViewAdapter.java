@@ -25,7 +25,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class SettingsViewAdapter extends RecyclerView.Adapter<SettingsViewAdapter.ViewHolder> {
+public class SettingsViewAdapter extends RecyclerView.Adapter<SettingsViewAdapter.ViewHolder>  {
+
+    // declarations
 
     public ArrayList<String> mImageNames = new ArrayList<>();
     public ArrayList<String> mImages = new ArrayList<>();
@@ -60,7 +62,15 @@ public class SettingsViewAdapter extends RecyclerView.Adapter<SettingsViewAdapte
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
 
-/*                if (mImageNames.get(position)=="Define") {
+
+                if (MainActivity.settingsOpen) {
+                    MainActivity.settingsOpen = false;
+                    MainActivity.settingsView.setVisibility((View.INVISIBLE));
+                    MainActivity.frameLayout.setVisibility(View.VISIBLE);
+                }
+
+
+                /*                if (mImageNames.get(position)=="Define") {
                     Toast.makeText(mContext, "Define", Toast.LENGTH_SHORT).show();
                     MainActivity.test();
                 }
@@ -87,7 +97,6 @@ public class SettingsViewAdapter extends RecyclerView.Adapter<SettingsViewAdapte
 //                Toast.makeText(mContext, mImageNames.get(position), Toast.LENGTH_SHORT).show();
     //        }
         });
-
     }
 
     @Override
