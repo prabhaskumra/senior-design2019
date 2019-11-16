@@ -18,22 +18,10 @@ public class Tutorial extends AppCompatActivity {
         ImageAdapter adapter = new ImageAdapter(this);
         viewPager.setAdapter(adapter);
 
-        Button NextButton =(Button) findViewById(R.id.buttonNext);
-        Button PrevButton =(Button) findViewById(R.id.buttonPrev);
+
         Button BackButton =(Button) findViewById(R.id.buttonBack);
 
-        NextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-        PrevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         BackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

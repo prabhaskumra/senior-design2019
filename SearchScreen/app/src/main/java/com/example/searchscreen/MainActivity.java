@@ -2,11 +2,13 @@ package com.example.searchscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     ShowCamera showCamera;
 
-
+    private EditText editTextInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        frameLayout = (FrameLayout)findViewById(R.id.frameLayout2);
-
+        frameLayout = findViewById(R.id.frameLayout2);
+        editTextInput =  findViewById(R.id.editTextInput);
 
         // open the camera
 
@@ -31,14 +33,28 @@ public class MainActivity extends AppCompatActivity {
         showCamera = new ShowCamera(this, camera);
         frameLayout.addView(showCamera);
 
-        //Tutorial Button Set up
-        Button TutorialButton =(Button) findViewById(R.id.tool_tip);
-        TutorialButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View v) {
-                startActivity(new Intent(MainActivity.this, Tutorial.class));
-            }
-        });
+
+
 
     }
+    //Tutorial Button Set up
+    public void openTutorial(View view)
+    {
+        Intent intent = new Intent(MainActivity.this, Tutorial.class );
+        startActivity(intent);
+    }
+
+    public void onSearchClick(View v)
+    {
+        try {
+            Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
+            String term = editTextInput.getText().toString();
+            in.putExtra(SearchManager.QUERY, term);
+            startActivity(in);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+    }
+
 }

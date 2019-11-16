@@ -18,22 +18,6 @@
     </androidx.viewpager.widget.ViewPager>
 
     <Button
-        android:id="@+id/buttonNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        tools:layout_editor_absoluteX="320dp"
-        tools:layout_editor_absoluteY="677dp" />
-
-    <Button
-        android:id="@+id/buttonPrev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Previous"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="677dp" />
-
-    <Button
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
