@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">// changed icon to temporarily end errors
+        <item
+            android:id="@+id/nav_find"
+            android:icon="@drawable/tut1"
+            android:title="Find" />
+        <item
+            android:id="@+id/nav_word_search"
+            android:icon="@drawable/tut1"
+            android:title="Word Search" />
+        <item
+            android:id="@+id/nav_app_settings"
+            android:icon="@drawable/tut1"
+            android:title="Settings" />
+    </group>
+
+    <item android:title="Misc Actions">
+        <menu>
+            <item
+                android:id="@+id/nav_activity_settings"
+                android:icon="@drawable/tut1"
+                android:title="Function Settings" />
+        </menu>
+    </item>
+
+</menu>

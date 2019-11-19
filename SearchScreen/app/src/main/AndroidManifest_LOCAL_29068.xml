@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.searchscreen">
 
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -22,20 +23,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Tutorial"></activity>
-        <activity android:name=".GoogleSearchIntentActivity"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- used to specify the ML models found in the article https://medium.com/androidiots/firebase-ml-kit-101-text-recognition-3c88f468bff6 -->
+        </activity>
+
+        <!-- used to specify the ML models found in the article https://medium.com/androidiots/firebase-ml-kit-101-text-recognition-3c88f468bff6 -->
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />
+
+
     </application>
 
 </manifest>
