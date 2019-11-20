@@ -1,6 +1,7 @@
 package com.example.searchscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+
+import android.content.Intent;
 
 import java.util.ArrayList;
 
@@ -19,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     Camera camera;
 
     public static FrameLayout frameLayout;
+    public static RelativeLayout wtfsettings;
+    public static ConstraintLayout wtfmain;
+
     ShowCamera showCamera;
 
     // vars for settings menu
@@ -27,11 +34,18 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         frameLayout = (FrameLayout)findViewById(R.id.frameLayout2);
+
+        final ImageButton settingsButton = findViewById(R.id.app_settings);
+        final ImageButton functionButton = findViewById(R.id.function_menu);
+        final ImageButton tutorialButton = findViewById(R.id.tool_tip);
+        final ImageButton backToCameraButton = findViewById(R.id.back_to_camera);
+
 
         // open the camera
         camera = Camera.open();
@@ -40,30 +54,39 @@ public class MainActivity extends AppCompatActivity {
 
         initImageBitmaps();
         settingsView.setVisibility(View.INVISIBLE);
+        backToCameraButton.setVisibility(View.INVISIBLE);
 
         // stuff for settings menu
-        ImageButton settingsButton = findViewById(R.id.app_settings);
-        ImageButton functionButton = findViewById(R.id.function_menu);
-        ImageButton tutorialButton = findViewById(R.id.tool_tip);
-        ImageButton backToCameraButton = findViewById(R.id.back_to_camera);
 
-        backToCameraButton.setVisibility(View.INVISIBLE);
 
         settingsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if (!settingsOpen){
-                    settingsOpen = true;
-                    frameLayout.setVisibility(View.INVISIBLE);
-                    settingsView.setVisibility(View.VISIBLE);
-                }
-                else{
-                    settingsOpen = false;
-                    frameLayout.setVisibility(View.VISIBLE);
-                    settingsView.setVisibility(View.INVISIBLE);
-                }
+
+                frameLayout.setVisibility(View.INVISIBLE);
+                settingsView.setVisibility(View.VISIBLE);
+                functionButton.setVisibility(View.INVISIBLE);
+                tutorialButton.setVisibility(View.INVISIBLE);
+                settingsButton.setVisibility(View.INVISIBLE);
+                backToCameraButton.setVisibility(View.VISIBLE);
+
             }
         });
+
+        backToCameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                frameLayout.setVisibility(View.VISIBLE);
+                settingsView.setVisibility(View.INVISIBLE);
+                functionButton.setVisibility(View.VISIBLE);
+                tutorialButton.setVisibility(View.VISIBLE);
+                settingsButton.setVisibility(View.VISIBLE);
+                backToCameraButton.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
 
     }
 

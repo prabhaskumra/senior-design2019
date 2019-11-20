@@ -56,19 +56,26 @@ public class SettingsViewAdapter extends RecyclerView.Adapter<SettingsViewAdapte
                 .into(holder.image);
 
         holder.imageName.setText(mImageNames.get(position));
-
         holder.settingsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
 
 
+                MainActivity.frameLayout.setVisibility(View.VISIBLE);
+                MainActivity.settingsView.setVisibility(View.INVISIBLE);
+              /*  MainActivity.functionButton.setVisibility(View.VISIBLE);
+                MainActivity.tutorialButton.setVisibility(View.VISIBLE);
+                MainActivity.settingsButton.setVisibility(View.VISIBLE);
+                MainActivity.backToCameraButton.setVisibility(View.INVISIBLE); */
+
+/*
                 if (MainActivity.settingsOpen) {
                     MainActivity.settingsOpen = false;
                     MainActivity.settingsView.setVisibility((View.INVISIBLE));
                     MainActivity.frameLayout.setVisibility(View.VISIBLE);
                 }
-
+*/
 
                 /*                if (mImageNames.get(position)=="Define") {
                     Toast.makeText(mContext, "Define", Toast.LENGTH_SHORT).show();

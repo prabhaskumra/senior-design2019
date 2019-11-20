@@ -79,23 +79,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_menu_black_18dp" />
 
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/settings_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <ImageButton
         android:id="@+id/back_to_camera"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_width="69dp"
+        android:layout_height="62dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:background="#01000000"
         app:srcCompat="?attr/homeAsUpIndicator"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/settings_menu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        tools:layout_editor_absoluteY="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
