@@ -14,12 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     Camera camera;
 
     FrameLayout frameLayout;
+    ImageView mImageView;
     ShowCamera showCamera;
 
     private EditText editTextInput;
@@ -27,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        frameLayout = findViewById(R.id.frameLayout2);
+
+//        frameLayout = findViewById(R.id.frameLayout2);
+        mImageView = findViewById(R.id.image_view);
         editTextInput =  findViewById(R.id.editTextInput);
 
 
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         showCamera = new ShowCamera(this, camera);
-        frameLayout.addView(showCamera);
+//        frameLayout.addView(showCamera);
 
 
 
@@ -79,5 +83,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 }
