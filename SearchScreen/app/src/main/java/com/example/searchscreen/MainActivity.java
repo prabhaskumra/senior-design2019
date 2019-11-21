@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
     private static final int GALLERY_REQUEST_CODE = 1002;
+    private EditText editTextInput;
 
     Camera camera;
     FrameLayout frameLayout;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     Button mFromPhotos;
     Uri image_uri;
 
-    private EditText editTextInput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
-        camera = Camera.open();
+//        camera = Camera.open();
 
 
 //        function button to capture photos from camera. Also asks for permissions
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        showCamera = new ShowCamera(this, camera);
+//        showCamera = new ShowCamera(this, camera);
 //        frameLayout.addView(showCamera);
 
 
