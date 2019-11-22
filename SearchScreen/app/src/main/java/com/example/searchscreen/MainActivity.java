@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import android.content.Intent;
@@ -21,12 +22,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     Camera camera;
+    ShowCamera showCamera;
 
     public static FrameLayout frameLayout;
-    public static RelativeLayout wtfsettings;
-    public static ConstraintLayout wtfmain;
-
-    ShowCamera showCamera;
+    public static ConstraintLayout main_after_picture;
 
     // vars for settings menu
     public static RecyclerView settingsView, translateSettings, findSettings, text_to_speech_Settings;
@@ -34,18 +33,11 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        frameLayout = (FrameLayout)findViewById(R.id.frameLayout2);
-
-        final ImageButton settingsButton = findViewById(R.id.app_settings);
-        final ImageButton functionButton = findViewById(R.id.function_menu);
-        final ImageButton tutorialButton = findViewById(R.id.tool_tip);
-        final ImageButton backToCameraButton = findViewById(R.id.back_to_camera);
-
+        frameLayout = findViewById(R.id.frameLayout2);
 
         // open the camera
         camera = Camera.open();
@@ -53,16 +45,35 @@ public class MainActivity extends AppCompatActivity {
         frameLayout.addView(showCamera);
 
         initImageBitmaps();
-        settingsView.setVisibility(View.INVISIBLE);
-        backToCameraButton.setVisibility(View.INVISIBLE);
 
-        // stuff for settings menu
+        /* **************** SETTINGS STUFF************************ */
+        final ImageButton settingsButton = findViewById(R.id.app_settings);
+        final ImageButton functionButton = findViewById(R.id.function_menu);
+        final ImageButton tutorialButton = findViewById(R.id.tool_tip);
+        final ImageButton backToCameraButton = findViewById(R.id.back_to_camera);
+        /* ******************************************************* */
+
+        final Button translateButton = findViewById(R.id.translate_button);
+        final Button findButton = findViewById(R.id.find);
+        final Button textToSpeechButton = findViewById(R.id.text_to_speech);
+        final Button googleButton = findViewById(R.id.google);
+        final Button pictureButton = findViewById(R.id.picture);
+        final Button copyButton = findViewById(R.id.copy);
+
+        settingsView.setVisibility(View.INVISIBLE);
+
+        backToCameraButton.setVisibility(View.INVISIBLE);
+        translateButton.setVisibility(View.INVISIBLE);
+        findButton.setVisibility(View.INVISIBLE);
+        textToSpeechButton.setVisibility(View.INVISIBLE);
+        googleButton.setVisibility(View.INVISIBLE);
+        pictureButton.setVisibility(View.INVISIBLE);
+        copyButton.setVisibility(View.INVISIBLE);
 
 
         settingsButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
                 frameLayout.setVisibility(View.INVISIBLE);
                 settingsView.setVisibility(View.VISIBLE);
                 functionButton.setVisibility(View.INVISIBLE);
@@ -70,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
                 settingsButton.setVisibility(View.INVISIBLE);
                 backToCameraButton.setVisibility(View.VISIBLE);
 
+                translateButton.setVisibility(View.VISIBLE);
+                findButton.setVisibility(View.VISIBLE);
+                textToSpeechButton.setVisibility(View.VISIBLE);
+                googleButton.setVisibility(View.VISIBLE);
+                pictureButton.setVisibility(View.VISIBLE);
+                copyButton.setVisibility(View.VISIBLE);
             }
         });
 
@@ -84,14 +101,16 @@ public class MainActivity extends AppCompatActivity {
                 settingsButton.setVisibility(View.VISIBLE);
                 backToCameraButton.setVisibility(View.INVISIBLE);
 
+                translateButton.setVisibility(View.INVISIBLE);
+                findButton.setVisibility(View.INVISIBLE);
+                textToSpeechButton.setVisibility(View.INVISIBLE);
+                googleButton.setVisibility(View.INVISIBLE);
+                pictureButton.setVisibility(View.INVISIBLE);
+                copyButton.setVisibility(View.INVISIBLE);
+
             }
         });
-
-
     }
-
-
-
 
     private void initImageBitmaps(){
         mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
@@ -112,4 +131,6 @@ public class MainActivity extends AppCompatActivity {
         settingsView.setAdapter(adapter);
         settingsView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+
 }

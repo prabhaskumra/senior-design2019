@@ -61,9 +61,11 @@ public class SettingsViewAdapter extends RecyclerView.Adapter<SettingsViewAdapte
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
 
-
+/*
                 MainActivity.frameLayout.setVisibility(View.VISIBLE);
                 MainActivity.settingsView.setVisibility(View.INVISIBLE);
+
+ */
               /*  MainActivity.functionButton.setVisibility(View.VISIBLE);
                 MainActivity.tutorialButton.setVisibility(View.VISIBLE);
                 MainActivity.settingsButton.setVisibility(View.VISIBLE);

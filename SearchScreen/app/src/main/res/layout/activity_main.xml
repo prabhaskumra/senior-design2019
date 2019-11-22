@@ -9,6 +9,87 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
+
+        <Button
+            android:id="@+id/translate_button"
+            android:layout_width="108dp"
+            android:layout_height="55dp"
+            android:text="Translate"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="522dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            />
+
+        <Button
+            android:id="@+id/text_to_speech"
+            android:layout_width="108dp"
+            android:layout_height="55dp"
+            android:text="Text-to-speech"
+            tools:layout_editor_absoluteX="287dp"
+            tools:layout_editor_absoluteY="522dp"
+            app:layout_constraintBottom_toTopOf="@+id/translate_button"
+            app:layout_constraintLeft_toLeftOf="@+id/translate_button"
+            />
+
+        <Button
+            android:id="@+id/find"
+            android:layout_width="108dp"
+            android:layout_height="55dp"
+            android:text="Find"
+            tools:layout_editor_absoluteX="151dp"
+            tools:layout_editor_absoluteY="522dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/translate_button"/>
+
+        <Button
+            android:id="@+id/picture"
+            android:layout_width="108dp"
+            android:layout_height="55dp"
+            android:text="Picture"
+            tools:layout_editor_absoluteX="151dp"
+            tools:layout_editor_absoluteY="619dp"
+            app:layout_constraintBottom_toTopOf="@+id/find"
+            app:layout_constraintLeft_toRightOf="@+id/translate_button"/>
+
+        <Button
+            android:id="@+id/copy"
+            android:layout_width="108dp"
+            android:layout_height="55dp"
+            android:text="Copy"
+            tools:layout_editor_absoluteX="287dp"
+            tools:layout_editor_absoluteY="619dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/find"
+            />
+
+        <Button
+            android:id="@+id/google"
+            android:layout_width="108dp"
+            android:layout_height="55dp"
+            android:text="Google"
+
+            app:layout_constraintBottom_toTopOf="@+id/find"
+            app:layout_constraintLeft_toRightOf="@+id/picture"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -90,6 +171,7 @@
         />
 
     <ImageButton
+
         android:id="@+id/back_to_camera"
         android:padding="10dp"
         android:layout_width="69dp"
