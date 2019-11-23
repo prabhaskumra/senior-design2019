@@ -18,6 +18,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mFromPhotos = findViewById(R.id.from_photos);
 //        frameLayout = findViewById(R.id.frameLayout2);
         editTextInput =  findViewById(R.id.editTextInput);
+        editTextInput.addTextChangedListener(editWatcher);
 
         final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
@@ -138,6 +141,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    private final TextWatcher editWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        };
+    };
+
+
+
 
     private void openCamera() {
         ContentValues values = new ContentValues();
