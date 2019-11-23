@@ -3,7 +3,6 @@ package com.example.searchscreen.ui.camera;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;

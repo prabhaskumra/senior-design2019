@@ -35,7 +35,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- used to specify the ML models found in the article https://medium.com/androidiots/firebase-ml-kit-101-text-recognition-3c88f468bff6 -->
+        </activity>
+
+        <!-- used to specify the ML models found in the article https://medium.com/androidiots/firebase-ml-kit-101-text-recognition-3c88f468bff6 -->
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />
