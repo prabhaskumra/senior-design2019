@@ -1,5 +1,4 @@
 package com.example.searchscreen;
-
 /*
  * Copyright (C) The Android Open Source Project
  *
@@ -15,6 +14,7 @@ package com.example.searchscreen;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -36,7 +36,6 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
     private int id;
 
     private static final int TEXT_COLOR = Color.WHITE;
-    private static final int BOX_COLOR = Color.YELLOW;
 
     private static Paint rectPaint;
     private static Paint textPaint;
@@ -49,7 +48,7 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
 
         if (rectPaint == null) {
             rectPaint = new Paint();
-            rectPaint.setColor(BOX_COLOR);
+            rectPaint.setColor(TEXT_COLOR);
             rectPaint.setStyle(Paint.Style.STROKE);
             rectPaint.setStrokeWidth(4.0f);
         }
@@ -87,7 +86,7 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
             return false;
         }
         RectF rect = new RectF(textBlock.getBoundingBox());
-        //rect = translateRect(rect);
+        rect = translateRect(rect);
         return rect.contains(x, y);
     }
 
@@ -102,7 +101,7 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
 
         // Draws the bounding box around the TextBlock.
         RectF rect = new RectF(textBlock.getBoundingBox());
-        //rect = translateRect(rect);
+        rect = translateRect(rect);
         canvas.drawRect(rect, rectPaint);
 
         // Break the text into multiple lines and draw each one according to its own bounding box.

@@ -1,5 +1,4 @@
 package com.example.searchscreen;
-
 /*
  * Copyright (C) The Android Open Source Project
  *
@@ -16,14 +15,14 @@ package com.example.searchscreen;
  * limitations under the License.
  */
 
+
 import android.util.Log;
 import android.util.SparseArray;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.searchscreen.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
+
 /**
  * A very simple Processor which gets detected TextBlocks and adds them to the overlay
  * as OcrGraphics.
@@ -31,13 +30,6 @@ import com.google.android.gms.vision.text.TextBlock;
 public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
 
     private GraphicOverlay<OcrGraphic> graphicOverlay;
-
-    private Button searchButton;
-    private EditText searchText;
-
-    //searchButton = findViewById(R.id.searchBtn);
-    //searchText = findViewById(R.id.liveSearch;)
-
 
     OcrDetectorProcessor(GraphicOverlay<OcrGraphic> ocrGraphicOverlay) {
         graphicOverlay = ocrGraphicOverlay;
