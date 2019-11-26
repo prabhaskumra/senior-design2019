@@ -27,9 +27,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.util.Log;
 import android.view.GestureDetector;
@@ -37,11 +41,6 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -343,7 +342,6 @@ public final class OcrCaptureActivity extends AppCompatActivity {
      * @param rawY - the raw position of the tap.
      * @return true if the tap was on a TextBlock
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private boolean onTap(float rawX, float rawY) {
         OcrGraphic graphic = graphicOverlay.getGraphicAtLocation(rawX, rawY);
         TextBlock text = null;
