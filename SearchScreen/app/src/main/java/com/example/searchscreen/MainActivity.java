@@ -129,8 +129,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void onSearchClick(View v)
-//    {
+    public void onSearchClick(View v)
+    {
 //        try {
 //            Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
 //            String term = editTextInput.getText().toString();
@@ -139,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
 //        } catch (Exception e) {
 //            // TODO: handle exception
 //        }
-//
-//    }
+
+    }
     private final TextWatcher editWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
