@@ -72,26 +72,26 @@
 <!--        android:src="@drawable/ic_image_black_24dp"-->
 <!--        />-->
 
-    <EditText
-        android:id="@+id/editTextInput"
-        android:layout_width="0dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:background="#ffffff"
-        android:hint="Enter search text"
-        android:inputType="text"
-        android:singleLine="false"
-        android:overScrollMode="always"
-        android:scrollbarStyle="insideInset"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/from_photos"
-        app:layout_constraintEnd_toEndOf="@id/image_view"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_view" />
+<!--    <EditText-->
+<!--        android:id="@+id/editTextInput"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="41dp"-->
+<!--        android:layout_marginStart="1dp"-->
+<!--        android:layout_marginTop="1dp"-->
+<!--        android:layout_marginEnd="1dp"-->
+<!--        android:layout_marginBottom="1dp"-->
+<!--        android:background="#ffffff"-->
+<!--        android:hint="Enter search text"-->
+<!--        android:inputType="text"-->
+<!--        android:singleLine="false"-->
+<!--        android:overScrollMode="always"-->
+<!--        android:scrollbarStyle="insideInset"-->
+<!--        android:scrollbars="vertical"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/from_photos"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/image_view"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/image_view" />-->
 
     <Button
         android:id="@+id/from_photos"
@@ -104,9 +104,7 @@
         android:layout_marginBottom="1dp"
         android:text="From Photos"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/capture_image_btn"
-        app:layout_constraintTop_toBottomOf="@+id/editTextInput" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/capture_image_btn"
@@ -116,12 +114,11 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
         android:text="From Camera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/from_photos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextInput" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/image_view"
@@ -133,7 +130,7 @@
         android:layout_marginBottom="1dp"
         android:scaleType="centerCrop"
         android:src="@drawable/homescreen"
-        app:layout_constraintBottom_toTopOf="@+id/editTextInput"
+        app:layout_constraintBottom_toTopOf="@+id/from_photos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"

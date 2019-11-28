@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         mCaptureBtn = findViewById(R.id.capture_image_btn);
         mFromPhotos = findViewById(R.id.from_photos);
 //        frameLayout = findViewById(R.id.frameLayout2);
-        editTextInput =  findViewById(R.id.editTextInput);
-        editTextInput.addTextChangedListener(editWatcher);
+//        editTextInput =  findViewById(R.id.editTextInput);
+//        editTextInput.addTextChangedListener(editWatcher);
 
         final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
@@ -129,18 +129,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onSearchClick(View v)
-    {
-        try {
-            Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
-            String term = editTextInput.getText().toString();
-            in.putExtra(SearchManager.QUERY, term);
-            startActivity(in);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-
-    }
+//    public void onSearchClick(View v)
+//    {
+//        try {
+//            Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
+//            String term = editTextInput.getText().toString();
+//            in.putExtra(SearchManager.QUERY, term);
+//            startActivity(in);
+//        } catch (Exception e) {
+//            // TODO: handle exception
+//        }
+//
+//    }
     private final TextWatcher editWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
