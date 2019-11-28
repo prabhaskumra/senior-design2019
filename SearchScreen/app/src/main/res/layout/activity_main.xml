@@ -98,9 +98,10 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="51dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginBottom="56dp"
-        android:text="From Photos"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="16dp"
+        android:drawableLeft="@drawable/ic_attach_file_black_24dp"
+        android:text=" From Photos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -111,7 +112,8 @@
         android:layout_height="51dp"
         android:layout_marginStart="144dp"
         android:layout_marginBottom="128dp"
-        android:text="From Camera"
+        android:drawableLeft="@drawable/ic_camera_alt_black_24dp"
+        android:text=" From Camera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
