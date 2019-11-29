@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ShowCamera showCamera;
     Button mCaptureBtn;
     Button mFromPhotos;
+    Button openLiveOCR;
     Uri image_uri;
 
 
@@ -51,13 +52,17 @@ public class MainActivity extends AppCompatActivity {
         mImageView = findViewById(R.id.image_view);
         mCaptureBtn = findViewById(R.id.capture_image_btn);
         mFromPhotos = findViewById(R.id.from_photos);
-//        frameLayout = findViewById(R.id.frameLayout2);
-//        editTextInput =  findViewById(R.id.editTextInput);
-//        editTextInput.addTextChangedListener(editWatcher);
+        openLiveOCR = findViewById(R.id.live_ocr);
 
         final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
 
-//        camera = Camera.open();
+        //  this function will open OCR screen when live OCR button is clicked
+        openLiveOCR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openOCRActivity();
+            }
+        });
 
 
 //        function button to capture photos from camera. Also asks for permissions
@@ -72,16 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
                         requestPermissions(permission, PERMISSION_CODE);
                     }
-
                     else {
 //                         permission already granted
                         openCamera();
                     }
-
                 }
                 else {
                     openCamera();
-
                 }
 
             }
@@ -100,28 +102,26 @@ public class MainActivity extends AppCompatActivity {
 
                         requestPermissions(permission, PERMISSION_CODE);
                     }
-
                     else {
 //                         permission already granted
                         pickFromGallery();
                     }
-
                 }
                 else {
                     pickFromGallery();
-
                 }
-
             }
         });
-
-//        showCamera = new ShowCamera(this, camera);
-//        frameLayout.addView(showCamera);
-
-
-
-
     }
+
+
+//  this function will open OCR screen when live OCR button is clicked
+    public void openOCRActivity(){
+        Intent intent = new Intent(this, OcrCaptureActivity.class);
+        startActivity(intent);
+    }
+
+
     //Tutorial Button Set up
     public void openTutorial(View view)
     {
@@ -141,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
     }
+
+
     private final TextWatcher editWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -159,14 +161,11 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-
-
     private void openCamera() {
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
         image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-        // camera intent
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
@@ -199,7 +198,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
     }
 
     @Override
@@ -214,9 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case GALLERY_REQUEST_CODE:
-//                if(resultCode == RESULT_OK){
-//                    mImageView.setImageURI(image_uri);
-//                }
+
                 Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
@@ -235,7 +231,4 @@ public class MainActivity extends AppCompatActivity {
                 throw new IllegalStateException("Unexpected value: " + requestCode);
         }
     }
-
-
-
 }
