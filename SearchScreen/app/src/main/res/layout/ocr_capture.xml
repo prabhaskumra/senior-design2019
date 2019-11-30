@@ -29,6 +29,7 @@
         android:ems="10"
         android:hint="Search for a word"
         android:inputType="textPersonName"
+        android:overScrollMode="always"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.149"
