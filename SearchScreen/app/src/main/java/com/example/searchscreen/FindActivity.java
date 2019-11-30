@@ -12,12 +12,16 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Spinner;
@@ -62,7 +66,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     private Button mSearchButton;
     private Bitmap mSelectedImage;              //use this variable to look over images and stuff
     private GraphicOverlay mGraphicOverlay;     //graphic overlay object used to overlay on top of the images found
-    private TextView mTextView;                 //textview object
+    //private TextView mTextView;                 //textview object
     private Integer mImageMaxWidth;             //variable for max width of the image
     private Integer mImageMaxHeight;            //vairable for max height of the image
 
@@ -81,6 +85,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     private static final int DIM_IMG_SIZE_Y = 224;
     /* Preallocated buffers for storing image data. */
     private final int[] intValues = new int[DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y];
+    private EditText mTextView;
 
 
     @Override
@@ -92,6 +97,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         mSearchButton = findViewById(R.id.button);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         mTextView = findViewById(R.id.textView);
+        mTextView.addTextChangedListener(findEditWatcher);
 
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +117,22 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     }
+    private final TextWatcher findEditWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     private void runTextRecognition() {
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mSelectedImage);

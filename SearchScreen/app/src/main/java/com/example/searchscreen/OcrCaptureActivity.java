@@ -35,11 +35,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -83,7 +86,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
     // A TextToSpeech engine for speaking a String value.
     private TextToSpeech tts;
-
+    private EditText oLiveSearch;
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -94,6 +97,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         preview = (CameraSourcePreview) findViewById(R.id.preview);
         graphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
+        oLiveSearch =  findViewById(R.id.liveSearch);
+        oLiveSearch.addTextChangedListener(ocrEditWatcher);
 
         // Set good defaults for capturing text.
         boolean autoFocus = true;
@@ -130,6 +135,22 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 };
         tts = new TextToSpeech(this.getApplicationContext(), listener);
     }
+    private final TextWatcher ocrEditWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     /**
      * Handles the requesting of the camera permission.  This includes
