@@ -30,6 +30,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -38,6 +41,8 @@ import android.widget.RelativeLayout;
 import android.content.Intent;
 
 import java.util.ArrayList;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -53,10 +58,29 @@ public class MainActivity extends AppCompatActivity {
     ShowCamera showCamera;
     Button mCaptureBtn;
     Button mFromPhotos;
+    Button showFunctions;
     Uri image_uri;
 
+    // activity_find
+    ConstraintLayout activity_find;
+    ImageView imageView;
+    GraphicOverlay graphicOverlay;
+    TextView textView;
+    Spinner spinner;
+    Button button;
+
+    // activity_search
+    ImageView imageView2;
+    SearchView searchView;
+    EditText editText;
+    EditText tempSearch;
+    Button button2;
+
+
+
+
     ImageButton tutorialButton, backToCameraButton; // settingsButton
-    Button translateButton, findButton, textToSpeechButton, googleButton, pictureButton, copyButton, newPictureButton;
+    Button translateButton, findButton, textToSpeechButton, googleButton, pictureButton, copyButton, searchButton, newPictureButton;
     boolean pictureChosen = false;
 
     // public static FrameLayout frameLayout;
@@ -78,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
         copyButton.setVisibility(View.INVISIBLE);
         newPictureButton.setVisibility(View.INVISIBLE);
       //  settingsButton.setVisibility(View.INVISIBLE);
-        tutorialButton.setVisibility(View.INVISIBLE);
         backToCameraButton.setVisibility(View.INVISIBLE);
+        searchButton.setVisibility(View.INVISIBLE);
 
     }
 
@@ -96,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         //settingsButton.setVisibility(View.VISIBLE);
         tutorialButton.setVisibility(View.VISIBLE);
         backToCameraButton.setVisibility(View.VISIBLE);
+        searchButton.setVisibility(View.VISIBLE);
 
     }
 
@@ -115,6 +140,43 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void findButtonsOff(){
+        imageView.setVisibility(View.INVISIBLE);
+        //graphicOverlay.setVisibility(View.INVISIBLE);
+        textView.setVisibility(View.INVISIBLE);
+        spinner.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
+    }
+
+    public void findButtonsOn(){
+        imageView.setVisibility(View.VISIBLE);
+        //graphicOverlay.setVisibility(View.INVISIBLE);
+        textView.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.VISIBLE);
+        button.setVisibility(View.VISIBLE);
+    }
+
+    public void searchButtonsOff(){
+        imageView2.setVisibility(View.INVISIBLE);
+        searchView.setVisibility(View.INVISIBLE);
+        editText.setVisibility(View.INVISIBLE);
+        tempSearch.setVisibility(View.INVISIBLE);
+        button2.setVisibility(View.INVISIBLE);
+    }
+
+    public void searchButtonsOn() {
+        imageView2.setVisibility(View.VISIBLE);
+        searchView.setVisibility(View.VISIBLE);
+        editText.setVisibility(View.VISIBLE);
+        tempSearch.setVisibility(View.VISIBLE);
+        button2.setVisibility(View.VISIBLE);
+
+    }
+
+    public void otherFunctionsOff(){
+        searchButtonsOff();
+        findButtonsOff();
+    }
 
     //Tutorial Button Set up
     public void openTutorial(View view) {
@@ -253,6 +315,22 @@ public class MainActivity extends AppCompatActivity {
         pictureButton = findViewById(R.id.picture);
         copyButton = findViewById(R.id.copy);
         newPictureButton = findViewById(R.id.new_picture);
+        showFunctions = findViewById(R.id.show_functions);
+        searchButton = findViewById(R.id.search);
+
+//        activity_find = findViewById(R.id.activity_find);
+
+        imageView = findViewById(R.id.imageView);
+       // graphicOverlay = findViewById(R.id.graphicOverlay);
+        textView = findViewById(R.id.textView);
+        spinner = findViewById(R.id.spinner);
+        button = findViewById(R.id.button);
+
+        imageView2 = findViewById(R.id.imageView2);
+        searchView = findViewById(R.id.searchView);
+        editText = findViewById(R.id.editText);
+        tempSearch = findViewById(R.id.tempSearch);
+        button2 = findViewById(R.id.button2);
 
         /* INITIALIZE SETTINGS */
         mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
@@ -269,8 +347,19 @@ public class MainActivity extends AppCompatActivity {
         settingsView.setAdapter(adapter);
         settingsView.setLayoutManager(new LinearLayoutManager(this));
 
+        // set initial screen
         functionButtonsOff();
+        searchButtonsOff();
+
+        imageView.setVisibility(View.INVISIBLE);
+        //graphicOverlay.setVisibility(View.INVISIBLE);
+        textView.setVisibility(View.INVISIBLE);
+        spinner.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
+
         settingsView.setVisibility(View.INVISIBLE);
+        showFunctions.setVisibility(View.INVISIBLE);
+
     //    settingsButton.setVisibility(View.VISIBLE);
         tutorialButton.setVisibility(View.VISIBLE);
 
@@ -295,6 +384,32 @@ public class MainActivity extends AppCompatActivity {
         }); // end settingsButton.setOnClickListener
 */
 
+        showFunctions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                functionButtonsOn();
+                otherFunctionsOff();
+                mCaptureBtn.setVisibility(View.INVISIBLE);
+                mFromPhotos.setVisibility(View.INVISIBLE);
+            }
+        }); // end backToCameraButton.setOnClickListener
+
+        newPictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                functionButtonsOff();
+                searchButtonsOff();
+                findButtonsOff();
+                mCaptureBtn.setVisibility(View.VISIBLE);
+                mFromPhotos.setVisibility(View.VISIBLE);
+                mImageView.setVisibility(View.VISIBLE);
+
+            }
+
+        }); // end newPictureButton.setOnClickListener
+
         backToCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -308,6 +423,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }); // end backToCameraButton.setOnClickListener
 
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                functionButtonsOff();
+                searchButtonsOn();
+                newPictureButton.setVisibility(View.VISIBLE);
+                showFunctions.setVisibility(View.VISIBLE);
+            }
+
+        }); // end translateButton.setOnClickListener
+
+
         translateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -317,8 +444,28 @@ public class MainActivity extends AppCompatActivity {
         }); // end translateButton.setOnClickListener
 
         findButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                otherFunctionsOff();
+                functionButtonsOff();
+                showFunctions.setVisibility(View.VISIBLE);
+                newPictureButton.setVisibility(View.VISIBLE);
+
+//                activity_find.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.VISIBLE);
+//                graphicOverlay.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.VISIBLE);
+                spinner.setVisibility(View.VISIBLE);
+                button.setVisibility(View.VISIBLE);
+
+//                FindActivity.wtf();
+
+//                Intent intent = new Intent (FindActivity.class);
+
+
+ //               Intent intent = new Intent(MainActivity.this, FindActivity.class);
+   //             startActivity(intent);
 
             }
         }); // end findButton.setOnClickListener
@@ -355,18 +502,7 @@ public class MainActivity extends AppCompatActivity {
 
         }); // end copyButton.setOnClickListener
 
-        newPictureButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                functionButtonsOff();
-                mCaptureBtn.setVisibility(View.VISIBLE);
-                mFromPhotos.setVisibility(View.VISIBLE);
-                mImageView.setVisibility(View.VISIBLE);
-
-            }
-
-        }); // end copyButton.setOnClickListener
 
         final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
         // camera = Camera.open();
@@ -392,17 +528,9 @@ public class MainActivity extends AppCompatActivity {
                 mFromPhotos.setVisibility(View.INVISIBLE);
              //   mImageView.setVisibility(View.INVISIBLE);
                // editTextInput.setVisibility(View.INVISIBLE);
-                translateButton.setVisibility(View.VISIBLE);
-                findButton.setVisibility(View.VISIBLE);
-                textToSpeechButton.setVisibility(View.VISIBLE);
-                googleButton.setVisibility(View.VISIBLE);
-                pictureButton.setVisibility(View.VISIBLE);
-                copyButton.setVisibility(View.VISIBLE);
-                newPictureButton.setVisibility(View.VISIBLE);
+            functionButtonsOn();
 
-                pictureChosen = true;
-
-            }});
+            }}); // end mCaptureBtn.setOnClickListener
 
         // function button to pick photos from camera gallery. Also asks for permissions
         mFromPhotos.setOnClickListener(new View.OnClickListener() {
@@ -429,12 +557,7 @@ public class MainActivity extends AppCompatActivity {
                 mFromPhotos.setVisibility(View.INVISIBLE);
          //       editTextInput.setVisibility(View.INVISIBLE);
 
-                translateButton.setVisibility(View.VISIBLE);
-                findButton.setVisibility(View.VISIBLE);
-                textToSpeechButton.setVisibility(View.VISIBLE);
-                googleButton.setVisibility(View.VISIBLE);
-                pictureButton.setVisibility(View.VISIBLE);
-                copyButton.setVisibility(View.VISIBLE);
+                functionButtonsOn();
                 newPictureButton.setVisibility(View.VISIBLE);
 
                 pictureChosen = true;

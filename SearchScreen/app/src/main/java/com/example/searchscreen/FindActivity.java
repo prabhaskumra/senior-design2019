@@ -58,13 +58,13 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     private static final String TAG = "Main Activity"; //we use this for later inputs to keep string constant
 
     //declare our buttons and assets and stufffz
-    private ImageView mImageView;
-    private Button mSearchButton;
-    private Bitmap mSelectedImage;              //use this variable to look over images and stuff
-    private GraphicOverlay mGraphicOverlay;     //graphic overlay object used to overlay on top of the images found
-    private TextView mTextView;                 //textview object
-    private Integer mImageMaxWidth;             //variable for max width of the image
-    private Integer mImageMaxHeight;            //vairable for max height of the image
+    public ImageView mImageView;
+    public Button mSearchButton;
+    public Bitmap mSelectedImage;              //use this variable to look over images and stuff
+    public GraphicOverlay mGraphicOverlay;     //graphic overlay object used to overlay on top of the images found
+    public TextView mTextView;                 //textview object
+    public Integer mImageMaxWidth;             //variable for max width of the image
+    public Integer mImageMaxHeight;            //vairable for max height of the image
 
 
     /**
@@ -81,6 +81,11 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     private static final int DIM_IMG_SIZE_Y = 224;
     /* Preallocated buffers for storing image data. */
     private final int[] intValues = new int[DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y];
+
+
+    public  void wtf (){
+        mGraphicOverlay.setVisibility(View.VISIBLE);
+    }
 
 
     @Override
