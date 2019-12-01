@@ -63,3 +63,4 @@ dependencies {
     // wtf
 
 }
+apply plugin: 'com.google.gms.google-services'

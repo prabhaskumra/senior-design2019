@@ -38,6 +38,7 @@
 
         <activity android:name=".GoogleSearchIntentActivity"></activity>
         <activity android:name=".OcrCaptureActivity"></activity>
+
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -47,6 +48,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
 
         <!-- This is just to test  if the live OCR works
         <activity android:name="com.example.searchscreen.OcrCaptureActivity"
@@ -56,7 +58,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         END live OCR activity -->
+        -->
+
+        <!-- END live OCR activity -->
 
 
     </application>

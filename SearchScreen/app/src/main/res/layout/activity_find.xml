@@ -8,62 +8,43 @@
     android:layout_height="match_parent"
     tools:context=".FindActivity">
 
-<ImageView
-    android:id="@+id/imageView"
-    android:layout_width="413dp"
-    android:layout_height="354dp"
-    android:contentDescription="@string/image_for_textrec"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.0"
-    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="413dp"
+        android:layout_height="354dp"
+        android:contentDescription="@string/image_for_textrec"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <com.example.searchscreen.GraphicOverlay
+        android:id="@+id/graphicOverlay"
+        android:layout_width="413dp"
+        android:layout_height="353dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 
-<com.example.searchscreen.GraphicOverlay
-    android:id="@+id/graphicOverlay"
-    android:layout_width="413dp"
-    android:layout_height="353dp"
-    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="1.0" />
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="407dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="4dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-<EditText
-    android:id="@+id/textView"
-    android:layout_width="402dp"
-    android:layout_height="154dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="2dp"
-    android:singleLine="false"
-    android:overScrollMode="always"
-    android:scrollbarStyle="insideInset"
-    android:scrollbars="vertical"
-    android:background="@android:drawable/dialog_holo_light_frame"
-    android:text="@string/text_from_image"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.529"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/imageView"
-    tools:visibility="visible" />
-
-<Spinner
-    android:id="@+id/spinner"
-    android:layout_width="407dp"
-    android:layout_height="52dp"
-    android:layout_marginEnd="4dp"
-    android:background="@android:drawable/btn_dropdown"
-    android:spinnerMode="dropdown"
-    app:layout_constraintBottom_toTopOf="@+id/button"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-<Button
+    <Button
     android:id="@+id/button"
     android:layout_width="297dp"
     android:layout_height="54dp"
@@ -72,6 +53,19 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="378dp"
+        android:layout_height="170dp"
+        android:layout_marginBottom="40dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/graphicOverlay"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/backFind"
