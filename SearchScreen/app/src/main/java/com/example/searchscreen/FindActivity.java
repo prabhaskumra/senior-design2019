@@ -13,8 +13,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.Editable;
-import android.text.TextWatcher;
+
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -32,6 +31,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.example.searchscreen.GraphicOverlay.Graphic;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.ml.common.FirebaseMLException;
 import com.google.firebase.ml.custom.FirebaseModelDataType;
 import com.google.firebase.ml.custom.FirebaseModelInputOutputOptions;
@@ -60,13 +60,15 @@ import java.util.List;
 public class FindActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private static final String TAG = "Main Activity"; //we use this for later inputs to keep string constant
+    //FirebaseApp.initializeApp(this);
 
     //declare our buttons and assets and stufffz
+    private TextView mTextView;                   //this is the text variable
     private ImageView mImageView;
     private Button mSearchButton;
     private Bitmap mSelectedImage;              //use this variable to look over images and stuff
     private GraphicOverlay mGraphicOverlay;     //graphic overlay object used to overlay on top of the images found
-    //private TextView mTextView;                 //textview object
+    //private TextView mTextView;               //textview object
     private Integer mImageMaxWidth;             //variable for max width of the image
     private Integer mImageMaxHeight;            //vairable for max height of the image
 
@@ -85,20 +87,17 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     private static final int DIM_IMG_SIZE_Y = 224;
     /* Preallocated buffers for storing image data. */
     private final int[] intValues = new int[DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y];
-    private EditText mTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_find);
 
         mImageView = findViewById(R.id.imageView);
         mSearchButton = findViewById(R.id.button);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
-        mTextView = findViewById(R.id.textView);
-        mTextView.addTextChangedListener(findEditWatcher);
-
+        mTextView  = findViewById(R.id.textView);
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,22 +116,6 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     }
-    private final TextWatcher findEditWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
 
     private void runTextRecognition() {
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mSelectedImage);
@@ -194,7 +177,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         Log.i(TAG, sentence);  //this will log the current sentence to check if the sentence is being recognized correctly.
-        mTextView.setText(sentence);
+        mTextView.setText(sentence); //this will put the sentence into the text view
     }
 
 
@@ -275,7 +258,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         mGraphicOverlay.clear();
         switch (position) {
             case 0:
-                mSelectedImage = getBitmapFromAsset(this, "grinch.jpg");
+                mSelectedImage = getBitmapFromAsset(this, "grass.jpg");
                 break;
             case 1:
                 // Whatever you want to happen when the thrid item gets selected
