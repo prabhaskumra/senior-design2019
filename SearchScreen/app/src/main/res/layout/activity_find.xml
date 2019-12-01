@@ -20,8 +20,8 @@
     app:layout_constraintVertical_bias="0.0"
     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <!--
-<com.example.searchscreen.GraphicOverlay.GraphicOverlay
+
+<com.example.searchscreen.GraphicOverlay
     android:id="@+id/graphicOverlay"
     android:layout_width="413dp"
     android:layout_height="353dp"
@@ -31,7 +31,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="1.0" />
-    -->
+
 
 <EditText
     android:id="@+id/textView"
@@ -72,5 +72,16 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/backFind"
+        android:layout_width="53dp"
+        android:onClick="onBackPressed"
+        android:layout_height="41dp"
+        app:srcCompat="?attr/homeAsUpIndicator"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

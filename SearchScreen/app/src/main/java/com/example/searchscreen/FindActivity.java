@@ -2,6 +2,7 @@ package com.example.searchscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -69,7 +70,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     //private TextView mTextView;                 //textview object
     private Integer mImageMaxWidth;             //variable for max width of the image
     private Integer mImageMaxHeight;            //vairable for max height of the image
-
+    private ImageView mBackButtonFind;
 
     /**
      * Name of the model file hosted with Firebase.
@@ -91,14 +92,22 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_find);
 
         mImageView = findViewById(R.id.imageView);
         mSearchButton = findViewById(R.id.button);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         mTextView = findViewById(R.id.textView);
         mTextView.addTextChangedListener(findEditWatcher);
+        mBackButtonFind = findViewById(R.id.backFind);
 
+        mBackButtonFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                MainActivity.functionButtonsOn();
+            }
+        });
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,8 +183,8 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
                 List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
                 for (int k = 0; k < elements.size(); k++) {
                     //---- This code now here vvv will create a graphic text overlay that will and over each word that is found.
-                    //Graphic textGraphic = new TextGraphic(mGraphicOverlay, elements.get(k));
-                    //mGraphicOverlay.add(textGraphic);
+                    Graphic textGraphic = new TextGraphic(mGraphicOverlay, elements.get(k));
+                    mGraphicOverlay.add(textGraphic);
 
                     /* this code implements the search function and overlays a red box if the word is found
                     String tempWord = elements.get(k).getText();
