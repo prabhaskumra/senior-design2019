@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".FindActivity">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/full_activity_find2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FindActivity">
 
 <ImageView
     android:id="@+id/imageView"
@@ -18,6 +20,7 @@ tools:context=".FindActivity">
     app:layout_constraintVertical_bias="0.0"
     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+    <!--
 <com.example.searchscreen.GraphicOverlay.GraphicOverlay
     android:id="@+id/graphicOverlay"
     android:layout_width="413dp"
@@ -28,6 +31,7 @@ tools:context=".FindActivity">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="1.0" />
+    -->
 
 <EditText
     android:id="@+id/textView"
