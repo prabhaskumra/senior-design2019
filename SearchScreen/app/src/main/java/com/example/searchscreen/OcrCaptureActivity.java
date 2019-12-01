@@ -42,6 +42,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -119,6 +120,30 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         Snackbar.make(graphicOverlay, "Tap to Speak. Pinch/Stretch to zoom",
                 Snackbar.LENGTH_LONG)
                 .show();
+
+        Button showFunctionsButtonOCR, newPictureButtonOCR;
+        showFunctionsButtonOCR = findViewById(R.id.show_functions_OCR);
+        newPictureButtonOCR = findViewById(R.id.new_picture_OCR);
+        showFunctionsButtonOCR.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+//                MainActivity.fun
+            }
+
+        }); // end showFunctionsButtonsOCR
+
+        newPictureButtonOCR.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OcrCaptureActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+
+        }); // end newPictureButtonOCR
+
+
 
         // Set up the Text To Speech engine.
         TextToSpeech.OnInitListener listener =
@@ -446,4 +471,5 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             }
         }
     }
+
 }

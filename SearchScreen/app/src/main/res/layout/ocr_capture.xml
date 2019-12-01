@@ -51,6 +51,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+
+    <Button
+        android:id="@+id/new_picture_OCR"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="108dp"
+        android:layout_height="55dp"
+        android:text="New Picture"
+        />
+
+    <Button
+        android:id="@+id/show_functions_OCR"
+        app:layout_constraintLeft_toRightOf="@+id/new_picture_OCR"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="108dp"
+        android:layout_height="55dp"
+        android:text="Functions"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
