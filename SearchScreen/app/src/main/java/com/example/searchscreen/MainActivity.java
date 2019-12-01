@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.pm.PackageManager;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -21,8 +20,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
     private static final int GALLERY_REQUEST_CODE = 1002;
-  //  private EditText editTextInput;
+
 
     Camera camera;
     FrameLayout frameLayout;
@@ -59,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     Button mCaptureBtn;
     Button mFromPhotos;
     Button showFunctions;
+    Button openLiveOCR;
     Uri image_uri;
 
     // activity_find
@@ -76,12 +74,9 @@ public class MainActivity extends AppCompatActivity {
     EditText tempSearch;
     Button button2;
 
-
-
-
     ImageButton tutorialButton, backToCameraButton; // settingsButton
     Button translateButton, findButton, textToSpeechButton, googleButton, pictureButton, copyButton, searchButton, newPictureButton;
-    boolean pictureChosen = false;
+//    Button showFunctionsButtonOCR, newPictureButtonOCR;
 
     // public static FrameLayout frameLayout;
     public static ConstraintLayout main_after_picture;
@@ -107,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionButtonsOn(){
+    public void functionButtonsOn() {
 
         backToCameraButton.setVisibility(View.VISIBLE);
         translateButton.setVisibility(View.VISIBLE);
@@ -122,61 +117,79 @@ public class MainActivity extends AppCompatActivity {
         backToCameraButton.setVisibility(View.VISIBLE);
         searchButton.setVisibility(View.VISIBLE);
 
-    }
+    } // end functionButtonsOn
 
     public void pictureButtonsOff(){
 
         mCaptureBtn.setVisibility(View.INVISIBLE);
         mFromPhotos.setVisibility(View.INVISIBLE);
-      //  editTextInput.setVisibility(View.INVISIBLE);
+        openLiveOCR.setVisibility(View.INVISIBLE);
 
-    }
+    } // end pictureButtonsOff()
 
     public void pictureButtonsOn(){
 
         mCaptureBtn.setVisibility(View.VISIBLE);
         mFromPhotos.setVisibility(View.VISIBLE);
-    //    editTextInput.setVisibility(View.VISIBLE);
+        openLiveOCR.setVisibility(View.VISIBLE);
 
-    }
+    } // end pictureButtonsOn()
 
     public void findButtonsOff(){
+
         imageView.setVisibility(View.INVISIBLE);
         //graphicOverlay.setVisibility(View.INVISIBLE);
         textView.setVisibility(View.INVISIBLE);
         spinner.setVisibility(View.INVISIBLE);
         button.setVisibility(View.INVISIBLE);
-    }
+
+    } // end findButtonsOff()
 
     public void findButtonsOn(){
+
         imageView.setVisibility(View.VISIBLE);
         //graphicOverlay.setVisibility(View.INVISIBLE);
         textView.setVisibility(View.VISIBLE);
         spinner.setVisibility(View.VISIBLE);
         button.setVisibility(View.VISIBLE);
-    }
+
+    } // end findButtonsOn()
 
     public void searchButtonsOff(){
+
         imageView2.setVisibility(View.INVISIBLE);
         searchView.setVisibility(View.INVISIBLE);
         editText.setVisibility(View.INVISIBLE);
         tempSearch.setVisibility(View.INVISIBLE);
         button2.setVisibility(View.INVISIBLE);
-    }
+
+    } // end searchButtonsOff()
 
     public void searchButtonsOn() {
+
         imageView2.setVisibility(View.VISIBLE);
         searchView.setVisibility(View.VISIBLE);
         editText.setVisibility(View.VISIBLE);
         tempSearch.setVisibility(View.VISIBLE);
         button2.setVisibility(View.VISIBLE);
 
-    }
+    } // end searchButtonsOn()
 
     public void otherFunctionsOff(){
+
         searchButtonsOff();
         findButtonsOff();
-    }
+
+    } // end otherFunctionsOff()
+
+//  this function will open OCR screen when live OCR button is clicked
+    public void openOCRActivity(){
+
+        Intent intent = new Intent(this, OcrCaptureActivity.class);
+        startActivity(intent);
+
+    } // end openOCRActivity
+
 
     //Tutorial Button Set up
     public void openTutorial(View view) {
@@ -187,7 +200,18 @@ public class MainActivity extends AppCompatActivity {
     } // end open tutorial
 
 
-    /*
+    public void onSearchClick(View v)
+    {
+//        try {
+//            Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
+//            String term = editTextInput.getText().toString();
+//            in.putExtra(SearchManager.QUERY, term);
+//            startActivity(in);
+//        } catch (Exception e) {
+//            // TODO: handle exception
+    }
+
+/*
     public void onSearchClick(View v) {
         try {
             Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
@@ -200,6 +224,8 @@ public class MainActivity extends AppCompatActivity {
 
     } // end onSearchClick
 */
+
+    /*
     private final TextWatcher editWatcher = new TextWatcher() {
 
         @Override
@@ -210,6 +236,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+    }
+
         }
 
         @Override
@@ -219,18 +247,18 @@ public class MainActivity extends AppCompatActivity {
 
     }; // end editWatcher
 
+     */
+
     private void openCamera() {
 
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera");
         image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-        // camera intent
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
         mImageView.setVisibility(View.VISIBLE);
-
 
     } // end openCamera
 
@@ -275,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case GALLERY_REQUEST_CODE:
+
                 //  if(resultCode == RESULT_OK){
                 //      mImageView.setImageURI(image_uri);
                 //  }
@@ -303,9 +332,6 @@ public class MainActivity extends AppCompatActivity {
         mImageView = findViewById(R.id.image_view);
         mCaptureBtn = findViewById(R.id.capture_image_btn);
         mFromPhotos = findViewById(R.id.from_photos);
-   //     editTextInput =  findViewById(R.id.editTextInput);
-      //  editTextInput.addTextChangedListener(editWatcher);
-       // settingsButton = findViewById(R.id.app_settings);
         tutorialButton = findViewById(R.id.tool_tip);
         backToCameraButton = findViewById(R.id.back_to_camera);
         translateButton = findViewById(R.id.translate_button);
@@ -317,51 +343,57 @@ public class MainActivity extends AppCompatActivity {
         newPictureButton = findViewById(R.id.new_picture);
         showFunctions = findViewById(R.id.show_functions);
         searchButton = findViewById(R.id.search);
-
-//        activity_find = findViewById(R.id.activity_find);
-
         imageView = findViewById(R.id.imageView);
-       // graphicOverlay = findViewById(R.id.graphicOverlay);
         textView = findViewById(R.id.textView);
         spinner = findViewById(R.id.spinner);
         button = findViewById(R.id.button);
-
         imageView2 = findViewById(R.id.imageView2);
         searchView = findViewById(R.id.searchView);
         editText = findViewById(R.id.editText);
         tempSearch = findViewById(R.id.tempSearch);
         button2 = findViewById(R.id.button2);
+        mImageView = findViewById(R.id.image_view);
+        mCaptureBtn = findViewById(R.id.capture_image_btn);
+        mFromPhotos = findViewById(R.id.from_photos);
+        openLiveOCR = findViewById(R.id.live_ocr);
+//        showFunctionsButtonOCR = findViewById(R.id.show_functions_OCR);
+//        newPictureButtonOCR = findViewById(R.id.new_picture_OCR);
 
-        /* INITIALIZE SETTINGS */
+        //  editTextInput =  findViewById(R.id.editTextInput);
+        //  editTextInput.addTextChangedListener(editWatcher);
+        //  settingsButton = findViewById(R.id.app_settings);
+        //  graphicOverlay = findViewById(R.id.graphicOverlay);
+        //  activity_find = findViewById(R.id.activity_find);
+        //  this function will open OCR screen when live OCR button is clicked
+
+
+        // INITIALIZE SETTINGS - taken out, but not commented out yet
+
         mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
         mNames.add("Find");
-
         mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
         mNames.add("Text-to-Speech");
-
         mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
         mNames.add("Translate");
-
         settingsView = findViewById(R.id.settings_menu);
         SettingsViewAdapter adapter = new SettingsViewAdapter(mNames, mImageUrls, this);
         settingsView.setAdapter(adapter);
         settingsView.setLayoutManager(new LinearLayoutManager(this));
 
+
         // set initial screen
         functionButtonsOff();
         searchButtonsOff();
-
         imageView.setVisibility(View.INVISIBLE);
-        //graphicOverlay.setVisibility(View.INVISIBLE);
         textView.setVisibility(View.INVISIBLE);
         spinner.setVisibility(View.INVISIBLE);
         button.setVisibility(View.INVISIBLE);
-
+        tutorialButton.setVisibility(View.VISIBLE);
         settingsView.setVisibility(View.INVISIBLE);
         showFunctions.setVisibility(View.INVISIBLE);
 
-    //    settingsButton.setVisibility(View.VISIBLE);
-        tutorialButton.setVisibility(View.VISIBLE);
+        // graphicOverlay.setVisibility(View.INVISIBLE);
+        // settingsButton.setVisibility(View.VISIBLE);
 
       /*  settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -384,14 +416,42 @@ public class MainActivity extends AppCompatActivity {
         }); // end settingsButton.setOnClickListener
 */
 
+        openLiveOCR.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                openOCRActivity();
+            }
+
+        }); // end openLiveOCR
+
+//        showFunctionsButtonOCR.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//    //            openOCRActivity();
+//            }
+//
+//        }); // end showFunctionsButtonsOCR
+//
+//        newPictureButtonOCR.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//        //        openOCRActivity();
+//            }
+//
+//        }); // end newPictureButtonOCR
+
+
         showFunctions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 functionButtonsOn();
                 otherFunctionsOff();
-                mCaptureBtn.setVisibility(View.INVISIBLE);
-                mFromPhotos.setVisibility(View.INVISIBLE);
+                pictureButtonsOff();
+                showFunctions.setVisibility(View.INVISIBLE);
             }
         }); // end backToCameraButton.setOnClickListener
 
@@ -402,9 +462,9 @@ public class MainActivity extends AppCompatActivity {
                 functionButtonsOff();
                 searchButtonsOff();
                 findButtonsOff();
-                mCaptureBtn.setVisibility(View.VISIBLE);
-                mFromPhotos.setVisibility(View.VISIBLE);
+                pictureButtonsOn();
                 mImageView.setVisibility(View.VISIBLE);
+                showFunctions.setVisibility(View.VISIBLE);
 
             }
 
@@ -524,10 +584,9 @@ public class MainActivity extends AppCompatActivity {
                     openCamera();
                 }
                 mImageView.setVisibility(View.VISIBLE);
-                mCaptureBtn.setVisibility(View.INVISIBLE);
-                mFromPhotos.setVisibility(View.INVISIBLE);
-             //   mImageView.setVisibility(View.INVISIBLE);
-               // editTextInput.setVisibility(View.INVISIBLE);
+                pictureButtonsOff();
+                // mImageView.setVisibility(View.INVISIBLE);
+                // editTextInput.setVisibility(View.INVISIBLE);
             functionButtonsOn();
 
             }}); // end mCaptureBtn.setOnClickListener
@@ -552,16 +611,10 @@ public class MainActivity extends AppCompatActivity {
                     pickFromGallery();
                 }
                 mImageView.setVisibility(View.VISIBLE);
-
-                mCaptureBtn.setVisibility(View.INVISIBLE);
-                mFromPhotos.setVisibility(View.INVISIBLE);
-         //       editTextInput.setVisibility(View.INVISIBLE);
-
-                functionButtonsOn();
+                tutorialButton.setVisibility(View.VISIBLE);
                 newPictureButton.setVisibility(View.VISIBLE);
-
-                pictureChosen = true;
-
+                functionButtonsOn();
+                pictureButtonsOff();
             }});
 
     } // end onCreate

@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.searchscreen">
+    package="com.example.searchscreen"
+    android:installLocation="auto">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<!--        android:maxSdkVersion="18" />-->
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<!--        android:maxSdkVersion="18" />-->
-
-    <uses-feature android:name="android.hardware.Camera"
+    <uses-feature android:name="android.hardware.camera"
                   android:required="true" />
 
 
@@ -25,10 +21,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- used to specify the ML models found in the article https://medium.com/androidiots/firebase-ml-kit-101-text-recognition-3c88f468bff6 -->
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="ocr" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="ocr" />
+
 
         <activity android:name=".Tutorial"></activity>
-        <activity android:name=".FindActivity"></activity>
         <activity android:name=".GoogleSearchIntentActivity"></activity>
+        <activity android:name=".OcrCaptureActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -37,15 +44,19 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- used to specify the ML models found in the article https://medium.com/androidiots/firebase-ml-kit-101-text-recognition-3c88f468bff6 -->
-        <meta-data
-            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-            android:value="ocr" />
+        </activity>
 
-
-
+        <!-- This is just to test  if the live OCR works
+        <activity android:name="com.example.searchscreen.OcrCaptureActivity"
+            android:label="Read Text">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+         END live OCR activity -->
 
 
     </application>
 
-    </manifest>
+</manifest>
