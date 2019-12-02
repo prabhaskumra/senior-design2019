@@ -93,34 +93,34 @@ public class MainActivity extends AppCompatActivity {
 
     public void functionButtonsOff(){
 
-        backToCameraButton.setVisibility(View.INVISIBLE);
-        translateButton.setVisibility(View.INVISIBLE);
-        findButton.setVisibility(View.INVISIBLE);
-        textToSpeechButton.setVisibility(View.INVISIBLE);
-        googleButton.setVisibility(View.INVISIBLE);
-        pictureButton.setVisibility(View.INVISIBLE);
-        copyButton.setVisibility(View.INVISIBLE);
-        newPictureButton.setVisibility(View.INVISIBLE);
-      //  settingsButton.setVisibility(View.INVISIBLE);
-        backToCameraButton.setVisibility(View.INVISIBLE);
-        searchButton.setVisibility(View.INVISIBLE);
+//        backToCameraButton.setVisibility(View.INVISIBLE);
+//        translateButton.setVisibility(View.INVISIBLE);
+//        findButton.setVisibility(View.INVISIBLE);
+//        textToSpeechButton.setVisibility(View.INVISIBLE);
+//        googleButton.setVisibility(View.INVISIBLE);
+//        pictureButton.setVisibility(View.INVISIBLE);
+//        copyButton.setVisibility(View.INVISIBLE);
+//        newPictureButton.setVisibility(View.INVISIBLE);
+//      //  settingsButton.setVisibility(View.INVISIBLE);
+//        backToCameraButton.setVisibility(View.INVISIBLE);
+//        searchButton.setVisibility(View.INVISIBLE);
 
     }
 
     public static void functionButtonsOn() {
 
-        backToCameraButton.setVisibility(View.VISIBLE);
-        translateButton.setVisibility(View.VISIBLE);
-        findButton.setVisibility(View.VISIBLE);
-        textToSpeechButton.setVisibility(View.VISIBLE);
-        googleButton.setVisibility(View.VISIBLE);
-        pictureButton.setVisibility(View.VISIBLE);
-        copyButton.setVisibility(View.VISIBLE);
-        newPictureButton.setVisibility(View.VISIBLE);
-        //settingsButton.setVisibility(View.VISIBLE);
-        tutorialButton.setVisibility(View.VISIBLE);
-        backToCameraButton.setVisibility(View.VISIBLE);
-        searchButton.setVisibility(View.VISIBLE);
+//        backToCameraButton.setVisibility(View.VISIBLE);
+//        translateButton.setVisibility(View.VISIBLE);
+//        findButton.setVisibility(View.VISIBLE);
+//        textToSpeechButton.setVisibility(View.VISIBLE);
+//        googleButton.setVisibility(View.VISIBLE);
+//        pictureButton.setVisibility(View.VISIBLE);
+//        copyButton.setVisibility(View.VISIBLE);
+//        newPictureButton.setVisibility(View.VISIBLE);
+//        //settingsButton.setVisibility(View.VISIBLE);
+//        tutorialButton.setVisibility(View.VISIBLE);
+//        backToCameraButton.setVisibility(View.VISIBLE);
+//        searchButton.setVisibility(View.VISIBLE);
 
     } // end functionButtonsOn
 
@@ -140,6 +140,12 @@ public class MainActivity extends AppCompatActivity {
 
     } // end pictureButtonsOn()
 
+    public void openFindActivity() {
+        Intent intent = new Intent(MainActivity.this, FindActivity.class);
+        startActivity(intent);
+
+    }
+
     public void findButtonsOff(){
 
     //    imageView.setVisibility(View.INVISIBLE);
@@ -152,11 +158,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void findButtonsOn(){
 
-      //  imageView.setVisibility(View.VISIBLE);
-        //graphicOverlay.setVisibility(View.INVISIBLE);
-        textView.setVisibility(View.VISIBLE);
-        spinner.setVisibility(View.VISIBLE);
-        button.setVisibility(View.VISIBLE);
+//      //  imageView.setVisibility(View.VISIBLE);
+//        //graphicOverlay.setVisibility(View.INVISIBLE);
+//        textView.setVisibility(View.VISIBLE);
+//        spinner.setVisibility(View.VISIBLE);
+//        button.setVisibility(View.VISIBLE);
 
     } // end findButtonsOn()
 
@@ -332,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 throw new IllegalStateException("Unexpected value: " + requestCode);
         }
-
+        openFindActivity();
     } // end onActivityResult
 
     @Override
@@ -344,16 +350,16 @@ public class MainActivity extends AppCompatActivity {
         mCaptureBtn = findViewById(R.id.capture_image_btn);
         mFromPhotos = findViewById(R.id.from_photos);
         tutorialButton = findViewById(R.id.tool_tip);
-        backToCameraButton = findViewById(R.id.back_to_camera);
-        translateButton = findViewById(R.id.translate_button);
-        findButton = findViewById(R.id.find);
-        textToSpeechButton = findViewById(R.id.text_to_speech);
-        googleButton = findViewById(R.id.google);
-        pictureButton = findViewById(R.id.picture);
-        copyButton = findViewById(R.id.copy);
-        newPictureButton = findViewById(R.id.new_picture);
-        showFunctions = findViewById(R.id.show_functions);
-        searchButton = findViewById(R.id.search);
+//        backToCameraButton = findViewById(R.id.back_to_camera);
+//        translateButton = findViewById(R.id.translate_button);
+//        findButton = findViewById(R.id.find);
+//        textToSpeechButton = findViewById(R.id.text_to_speech);
+//        googleButton = findViewById(R.id.google);
+//        pictureButton = findViewById(R.id.picture);
+//        copyButton = findViewById(R.id.copy);
+//        newPictureButton = findViewById(R.id.new_picture);
+//        showFunctions = findViewById(R.id.show_functions);
+//        searchButton = findViewById(R.id.search);
 
 
 
@@ -374,16 +380,16 @@ public class MainActivity extends AppCompatActivity {
 
         // INITIALIZE SETTINGS - taken out, but not commented out yet
 
-        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
-        mNames.add("Find");
-        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
-        mNames.add("Text-to-Speech");
-        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
-        mNames.add("Translate");
-        settingsView = findViewById(R.id.settings_menu);
-        SettingsViewAdapter adapter = new SettingsViewAdapter(mNames, mImageUrls, this);
-        settingsView.setAdapter(adapter);
-        settingsView.setLayoutManager(new LinearLayoutManager(this));
+//        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
+//        mNames.add("Find");
+//        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
+//        mNames.add("Text-to-Speech");
+//        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
+//        mNames.add("Translate");
+//        settingsView = findViewById(R.id.settings_menu);
+//        SettingsViewAdapter adapter = new SettingsViewAdapter(mNames, mImageUrls, this);
+//        settingsView.setAdapter(adapter);
+//        settingsView.setLayoutManager(new LinearLayoutManager(this));
 
 
         // set initial screen
@@ -394,8 +400,8 @@ public class MainActivity extends AppCompatActivity {
 //        spinner.setVisibility(View.INVISIBLE);
 //        button.setVisibility(View.INVISIBLE);
         tutorialButton.setVisibility(View.VISIBLE);
-        settingsView.setVisibility(View.INVISIBLE);
-        showFunctions.setVisibility(View.INVISIBLE);
+//        settingsView.setVisibility(View.INVISIBLE);
+//        showFunctions.setVisibility(View.INVISIBLE);
 
         // graphicOverlay.setVisibility(View.INVISIBLE);
         // settingsButton.setVisibility(View.VISIBLE);
@@ -449,123 +455,122 @@ public class MainActivity extends AppCompatActivity {
 //        }); // end newPictureButtonOCR
 
 
-        showFunctions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                functionButtonsOn();
-                otherFunctionsOff();
-                pictureButtonsOff();
-                showFunctions.setVisibility(View.INVISIBLE);
-            }
-        }); // end backToCameraButton.setOnClickListener
-
-        newPictureButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                functionButtonsOff();
-                searchButtonsOff();
-                findButtonsOff();
-                pictureButtonsOn();
-                mImageView.setVisibility(View.VISIBLE);
-                showFunctions.setVisibility(View.VISIBLE);
-
-            }
-
-        }); // end newPictureButton.setOnClickListener
-
-        backToCameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                functionButtonsOn();
-                pictureButtonsOn();
-                backToCameraButton.setVisibility(View.INVISIBLE);
-                mImageView.setVisibility(View.VISIBLE);
-                settingsView.setVisibility(View.INVISIBLE);
-
-            }
-        }); // end backToCameraButton.setOnClickListener
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                functionButtonsOff();
-                searchButtonsOn();
-                newPictureButton.setVisibility(View.VISIBLE);
-                showFunctions.setVisibility(View.VISIBLE);
-            }
-
-        }); // end translateButton.setOnClickListener
-
-
-        translateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-
-        }); // end translateButton.setOnClickListener
-
-        findButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                otherFunctionsOff();
-                functionButtonsOff();
-                showFunctions.setVisibility(View.VISIBLE);
-                newPictureButton.setVisibility(View.VISIBLE);
-
-//                activity_find.setVisibility(View.VISIBLE);
- //               imageView.setVisibility(View.VISIBLE);
-//                graphicOverlay.setVisibility(View.VISIBLE);
-//                textView.setVisibility(View.VISIBLE);
-//                spinner.setVisibility(View.VISIBLE);
-//                button.setVisibility(View.VISIBLE);
-
-//                FindActivity.wtf();
-
-
-
-                Intent intent = new Intent(MainActivity.this, FindActivity.class);
-                startActivity(intent);
-
-            }
-        }); // end findButton.setOnClickListener
-
-        textToSpeechButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        }); // end textToSpeechButton.setOnClickListener
-
-        googleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                  /*  try {
-                        Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
-                        String term = editTextInput.getText().toString();
-                        in.putExtra(SearchManager.QUERY, term);
-                        startActivity(in);
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }
-*/
-
-            }
-        }); // end googleButton.setOnClickListener
-
-        copyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mImageView.setVisibility(View.VISIBLE);
-            }
-
-        }); // end copyButton.setOnClickListener
-
+//        showFunctions.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                functionButtonsOn();
+//                otherFunctionsOff();
+//                pictureButtonsOff();
+//                showFunctions.setVisibility(View.INVISIBLE);
+//            }
+//        }); // end backToCameraButton.setOnClickListener
+//
+//        newPictureButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                functionButtonsOff();
+//                searchButtonsOff();
+//                findButtonsOff();
+//                pictureButtonsOn();
+//                mImageView.setVisibility(View.VISIBLE);
+//                showFunctions.setVisibility(View.VISIBLE);
+//
+//            }
+//
+//        }); // end newPictureButton.setOnClickListener
+//
+//        backToCameraButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                functionButtonsOn();
+//                pictureButtonsOn();
+//                backToCameraButton.setVisibility(View.INVISIBLE);
+//                mImageView.setVisibility(View.VISIBLE);
+//                settingsView.setVisibility(View.INVISIBLE);
+//
+//            }
+//        }); // end backToCameraButton.setOnClickListener
+//
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                functionButtonsOff();
+//                searchButtonsOn();
+//                newPictureButton.setVisibility(View.VISIBLE);
+//                showFunctions.setVisibility(View.VISIBLE);
+//            }
+//
+//        }); // end translateButton.setOnClickListener
+//
+//
+//        translateButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//
+//        }); // end translateButton.setOnClickListener
+//
+//        findButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                otherFunctionsOff();
+//                functionButtonsOff();
+//                showFunctions.setVisibility(View.VISIBLE);
+//                newPictureButton.setVisibility(View.VISIBLE);
+//
+////                activity_find.setVisibility(View.VISIBLE);
+// //               imageView.setVisibility(View.VISIBLE);
+////                graphicOverlay.setVisibility(View.VISIBLE);
+////                textView.setVisibility(View.VISIBLE);
+////                spinner.setVisibility(View.VISIBLE);
+////                button.setVisibility(View.VISIBLE);
+//
+//
+//
+//
+//                Intent intent = new Intent(MainActivity.this, FindActivity.class);
+//                startActivity(intent);
+//
+//            }
+//        }); // end findButton.setOnClickListener
+//
+//        textToSpeechButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        }); // end textToSpeechButton.setOnClickListener
+//
+//        googleButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                  /*  try {
+//                        Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
+//                        String term = editTextInput.getText().toString();
+//                        in.putExtra(SearchManager.QUERY, term);
+//                        startActivity(in);
+//                    } catch (Exception e) {
+//                        // TODO: handle exception
+//                    }
+//*/
+//
+//            }
+//        }); // end googleButton.setOnClickListener
+//
+//        copyButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mImageView.setVisibility(View.VISIBLE);
+//            }
+//
+//        }); // end copyButton.setOnClickListener
+//
 
 
         final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
@@ -613,11 +618,14 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     pickFromGallery();
                 }
-                functionButtonsOn();
-                pictureButtonsOff();
+//                functionButtonsOn();
+//                pictureButtonsOff();
                 // switch activities with intent here and other button
-                showFunctions.setVisibility(View.INVISIBLE);
-            }});
+
+//                showFunctions.setVisibility(View.INVISIBLE);
+
+            }
+        });
 
     } // end onCreate
 

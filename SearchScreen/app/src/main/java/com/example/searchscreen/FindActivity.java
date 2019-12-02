@@ -109,15 +109,15 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         mTextView = findViewById(R.id.textView);
 //        mTextView.addTextChangedListener(findEditWatcher);
-        mBackButtonFind = findViewById(R.id.backFind);
-
-        mBackButtonFind.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-                MainActivity.functionButtonsOn();
-            }
-        });
+//        mBackButtonFind = findViewById(R.id.backFind);
+//
+//        mBackButtonFind.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//                MainActivity.functionButtonsOn();
+//            }
+//        });
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
