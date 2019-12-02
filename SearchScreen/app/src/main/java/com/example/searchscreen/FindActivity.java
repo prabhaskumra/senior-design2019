@@ -3,6 +3,7 @@ package com.example.searchscreen;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -65,7 +66,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
 
     //declare our buttons and assets and stufffz
     private TextView mTextView;                   //this is the text variable
-    private ImageView mImageView;
+    public static ImageView mImageView;
     private Button mSearchButton;
     private Bitmap mSelectedImage;              //use this variable to look over images and stuff
     private GraphicOverlay mGraphicOverlay;     //graphic overlay object used to overlay on top of the images found
@@ -89,13 +90,21 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     /* Preallocated buffers for storing image data. */
     private final int[] intValues = new int[DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y];
 
+    public Uri example;
+    public Bitmap someImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
 
+        example = MainActivity.selectedImage;
+
+        someImage = MainActivity.example;
+
         mImageView = findViewById(R.id.imageView);
+        mImageView.setImageURI(MainActivity.selectedImage);
+
         mSearchButton = findViewById(R.id.button);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         mTextView = findViewById(R.id.textView);
@@ -124,6 +133,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
                 .simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(this);
+
 
 
     }
@@ -286,8 +296,10 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
             case 4:
                 mSelectedImage = getBitmapFromAsset(this, "Android.png");
 
-
         }
+
+        mSelectedImage = someImage;
+
         if (mSelectedImage != null) {
             // Get the dimensions of the View
             Pair<Integer, Integer> targetedSize = getTargetedWidthHeight();
@@ -308,7 +320,8 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
                             (int) (mSelectedImage.getHeight() / scaleFactor),
                             true);
 
-            mImageView.setImageBitmap(resizedBitmap);
+          //  mImageView.setImageBitmap(resizedBitmap);
+
             mSelectedImage = resizedBitmap;
         }
     }

@@ -14,6 +14,7 @@ import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.net.Uri;
@@ -47,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
     private static final int GALLERY_REQUEST_CODE = 1002;
+
+
+    public static Uri selectedImage;
+    public static Bitmap example;
 
 
     Camera camera;
@@ -308,7 +313,8 @@ public class MainActivity extends AppCompatActivity {
                 //  if(resultCode == RESULT_OK){
                 //      mImageView.setImageURI(image_uri);
                 //  }
-                Uri selectedImage = data.getData();
+                selectedImage = data.getData();
+//                Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                 cursor.moveToFirst();
@@ -318,6 +324,9 @@ public class MainActivity extends AppCompatActivity {
                 mImageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
 
                 mImageView.setImageURI(selectedImage);
+                example =  BitmapFactory.decodeFile(imgDecodableString);
+    //            FindActivity.mImageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+
 
                 break;
             default:
@@ -606,6 +615,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 functionButtonsOn();
                 pictureButtonsOff();
+                // switch activities with intent here and other button
                 showFunctions.setVisibility(View.INVISIBLE);
             }});
 
