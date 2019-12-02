@@ -190,7 +190,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback{
 
     }
 
-//    this function will take the picture
+//    this function will take the picturef
 //    @Override
 //    public void onClick(View v) {
 //        switch (previewState){

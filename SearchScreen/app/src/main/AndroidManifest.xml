@@ -34,6 +34,8 @@
 
 
         <activity android:name=".Tutorial"></activity>
+        <activity android:name=".FindActivity"></activity>
+
         <activity android:name=".GoogleSearchIntentActivity"></activity>
         <activity android:name=".OcrCaptureActivity"></activity>
 

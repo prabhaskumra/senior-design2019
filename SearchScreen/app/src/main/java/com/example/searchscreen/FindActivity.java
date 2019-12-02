@@ -2,6 +2,8 @@ package com.example.searchscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -64,14 +66,16 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
 
     //declare our buttons and assets and stufffz
     private TextView mTextView;                   //this is the text variable
-    private ImageView mImageView;
+    public static ImageView mImageView;
     private Button mSearchButton;
     private Bitmap mSelectedImage;              //use this variable to look over images and stuff
     private GraphicOverlay mGraphicOverlay;     //graphic overlay object used to overlay on top of the images found
     //private TextView mTextView;               //textview object
     private Integer mImageMaxWidth;             //variable for max width of the image
     private Integer mImageMaxHeight;            //vairable for max height of the image
+    private ImageView mBackButtonFind;
 
+    // buttons for user interface
 
     /**
      * Name of the model file hosted with Firebase.
@@ -88,16 +92,34 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     /* Preallocated buffers for storing image data. */
     private final int[] intValues = new int[DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y];
 
+    public Uri example;
+    public Bitmap someImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find);
 
+        example = MainActivity.selectedImage;
+
+        someImage = MainActivity.example;
+
         mImageView = findViewById(R.id.imageView);
+        mImageView.setImageURI(MainActivity.selectedImage);
+
         mSearchButton = findViewById(R.id.button);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
-        mTextView  = findViewById(R.id.textView);
+        mTextView = findViewById(R.id.textView);
+//        mTextView.addTextChangedListener(findEditWatcher);
+//        mBackButtonFind = findViewById(R.id.backFind);
+//
+//        mBackButtonFind.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//                MainActivity.functionButtonsOn();
+//            }
+//        });
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +135,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
                 .simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(this);
+
 
 
     }
@@ -157,8 +180,8 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
                 List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
                 for (int k = 0; k < elements.size(); k++) {
                     //---- This code now here vvv will create a graphic text overlay that will and over each word that is found.
-                    //Graphic textGraphic = new TextGraphic(mGraphicOverlay, elements.get(k));
-                    //mGraphicOverlay.add(textGraphic);
+                    Graphic textGraphic = new TextGraphic(mGraphicOverlay, elements.get(k));
+                    mGraphicOverlay.add(textGraphic);
 
                     /* this code implements the search function and overlays a red box if the word is found
                     String tempWord = elements.get(k).getText();
@@ -275,8 +298,10 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
             case 4:
                 mSelectedImage = getBitmapFromAsset(this, "Android.png");
 
-
         }
+
+        mSelectedImage = someImage;
+
         if (mSelectedImage != null) {
             // Get the dimensions of the View
             Pair<Integer, Integer> targetedSize = getTargetedWidthHeight();
@@ -297,7 +322,8 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
                             (int) (mSelectedImage.getHeight() / scaleFactor),
                             true);
 
-            mImageView.setImageBitmap(resizedBitmap);
+          //  mImageView.setImageBitmap(resizedBitmap);
+
             mSelectedImage = resizedBitmap;
         }
     }
