@@ -70,7 +70,6 @@
     <ImageView
         android:id="@+id/backFind"
         android:layout_width="53dp"
-        android:onClick="onBackPressed"
         android:layout_height="41dp"
         app:srcCompat="?attr/homeAsUpIndicator"
         app:layout_constraintTop_toTopOf="parent"

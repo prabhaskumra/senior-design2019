@@ -316,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
                 String imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
                 mImageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+
                 mImageView.setImageURI(selectedImage);
 
                 break;
@@ -578,10 +579,9 @@ public class MainActivity extends AppCompatActivity {
                     openCamera();
                 }
                 mImageView.setVisibility(View.VISIBLE);
-//                pictureButtonsOff();
-//                // mImageView.setVisibility(View.INVISIBLE);
-//                // editTextInput.setVisibility(View.INVISIBLE);
-//            functionButtonsOn();
+                functionButtonsOn();
+                pictureButtonsOff();
+                showFunctions.setVisibility(View.INVISIBLE);
 
             }}); // end mCaptureBtn.setOnClickListener
 
@@ -604,11 +604,9 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     pickFromGallery();
                 }
-//                mImageView.setVisibility(View.VISIBLE);
-//                tutorialButton.setVisibility(View.VISIBLE);
-//                newPictureButton.setVisibility(View.VISIBLE);
                 functionButtonsOn();
                 pictureButtonsOff();
+                showFunctions.setVisibility(View.INVISIBLE);
             }});
 
     } // end onCreate
