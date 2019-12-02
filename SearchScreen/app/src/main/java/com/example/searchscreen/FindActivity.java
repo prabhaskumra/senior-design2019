@@ -2,6 +2,7 @@ package com.example.searchscreen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -73,9 +74,12 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     //private TextView mTextView;               //textview object
     private Integer mImageMaxWidth;             //variable for max width of the image
     private Integer mImageMaxHeight;            //vairable for max height of the image
-    private ImageView mBackButtonFind;
 
     // buttons for user interface
+    private Button mNewPictureButton, mGoogleButton;
+
+    // buttons for Google activity
+    private TextView textViewInput;
 
     /**
      * Name of the model file hosted with Firebase.
@@ -110,16 +114,30 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         mSearchButton = findViewById(R.id.button);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         mTextView = findViewById(R.id.textView);
-//        mTextView.addTextChangedListener(findEditWatcher);
-//        mBackButtonFind = findViewById(R.id.backFind);
-//
-//        mBackButtonFind.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//                MainActivity.functionButtonsOn();
-//            }
-//        });
+        mNewPictureButton = findViewById(R.id.new_picture);
+        mGoogleButton = findViewById(R.id.google_button);
+        textViewInput =  findViewById(R.id.textView);
+//        textViewInput.addTextChangedListener(editWatcher);
+        textViewInput.setText("Hello");
+        mNewPictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        mGoogleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                   try {
+                        Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
+                        String term = textViewInput.getText().toString();
+                        in.putExtra(SearchManager.QUERY, term);
+                        startActivity(in);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }            }
+        });
 
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,8 +153,6 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
                 .simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(this);
-
-
 
     }
 

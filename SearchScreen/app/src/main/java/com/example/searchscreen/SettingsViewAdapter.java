@@ -27,6 +27,24 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class SettingsViewAdapter {//} extends RecyclerView.Adapter<SettingsViewAdapter.ViewHolder>  {
 
+    // INITIALIZE SETTINGS - taken out, but not commented out yet
+
+//        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
+//        mNames.add("Find");
+//        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
+//        mNames.add("Text-to-Speech");
+//        mImageUrls.add("https://en.meming.world/images/en/6/6e/Surprised_Pikachu.jpg");
+//        mNames.add("Translate");
+//        settingsView = findViewById(R.id.settings_menu);
+//        SettingsViewAdapter adapter = new SettingsViewAdapter(mNames, mImageUrls, this);
+//        settingsView.setAdapter(adapter);
+//        settingsView.setLayoutManager(new LinearLayoutManager(this));
+
+    // vars for settings menu
+//    public static RecyclerView settingsView, translateSettings, findSettings, text_to_speech_Settings;
+//    public ArrayList<String> mNames = new ArrayList<>();
+//    private ArrayList<String> mImageUrls = new ArrayList<>();
+
 //    // declarations
 //
 //    public ArrayList<String> mImageNames = new ArrayList<>();
