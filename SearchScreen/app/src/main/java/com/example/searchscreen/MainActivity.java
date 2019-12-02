@@ -270,6 +270,9 @@ public class MainActivity extends AppCompatActivity {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
+
+
+
         mImageView.setVisibility(View.VISIBLE);
 
     } // end openCamera
@@ -327,9 +330,9 @@ public class MainActivity extends AppCompatActivity {
                 int columnIndex = cursor.getColumnIndex((filePathColumn[0]));
                 String imgDecodableString = cursor.getString(columnIndex);
                 cursor.close();
-                mImageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+              //  mImageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
 
-                mImageView.setImageURI(selectedImage);
+             //   mImageView.setImageURI(selectedImage);
                 example =  BitmapFactory.decodeFile(imgDecodableString);
     //            FindActivity.mImageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
 
@@ -337,8 +340,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + requestCode);
-        }
+
+        } // end switch statement
+
+
         openFindActivity();
+
     } // end onActivityResult
 
     @Override
@@ -592,10 +599,10 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     openCamera();
                 }
-                mImageView.setVisibility(View.VISIBLE);
-                functionButtonsOn();
-                pictureButtonsOff();
-                showFunctions.setVisibility(View.INVISIBLE);
+//                mImageView.setVisibility(View.VISIBLE);
+//                functionButtonsOn();
+//                pictureButtonsOff();
+//                showFunctions.setVisibility(View.INVISIBLE);
 
             }}); // end mCaptureBtn.setOnClickListener
 

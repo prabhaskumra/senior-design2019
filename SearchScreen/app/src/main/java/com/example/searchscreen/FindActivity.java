@@ -75,6 +75,8 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     private Integer mImageMaxHeight;            //vairable for max height of the image
     private ImageView mBackButtonFind;
 
+    // buttons for user interface
+
     /**
      * Name of the model file hosted with Firebase.
      */
