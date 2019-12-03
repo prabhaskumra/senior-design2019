@@ -27,6 +27,7 @@
         android:layout_height="91dp"
         android:layout_marginBottom="4dp"
         android:ems="10"
+        android:background="@color/cardview_light_background"
         android:hint="Search for a word"
         android:inputType="textPersonName"
         android:singleLine="false"
@@ -61,15 +62,40 @@
         android:text="New Picture"
         />
 
-    <Button
-        android:id="@+id/show_functions_OCR"
-        app:layout_constraintLeft_toRightOf="@+id/new_picture_OCR"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="108dp"
-        android:layout_height="55dp"
-        android:text="Functions"
-        />
 
+
+
+<!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
+
+<!--    <Button-->
+<!--        android:id="@+id/google_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Google"-->
+<!--        android:layout_marginHorizontal="75dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        />-->
+<!--    -->
+<!--    <Button-->
+<!--        android:id="@+id/text_to_speech_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Speak"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/google_button"-->
+<!--        />-->
+
+
+<!--    <Button-->
+<!--        android:id="@+id/copy_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Copy"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/text_to_speech_button"-->
+<!--        />-->
+<!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

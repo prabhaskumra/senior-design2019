@@ -3,9 +3,11 @@ package com.example.searchscreen;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.SearchManager;
+import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +17,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.ClipboardManager;
 
 
 import android.util.Log;
@@ -58,6 +61,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.List;
+import java.util.Locale;
 
 
 public class FindActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -66,14 +70,18 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     //FirebaseApp.initializeApp(this);
 
     //declare our buttons and assets and stufffz
-    private TextView mTextView;                   //this is the text variable
+    public EditText mEditText;                   //this is the text variable
     public static ImageView mImageView;
     private Button mSearchButton;
     private Bitmap mSelectedImage;              //use this variable to look over images and stuff
     private GraphicOverlay mGraphicOverlay;     //graphic overlay object used to overlay on top of the images found
-    //private TextView mTextView;               //textview object
+    private TextView mTextView;               //textview object
     private Integer mImageMaxWidth;             //variable for max width of the image
     private Integer mImageMaxHeight;            //vairable for max height of the image
+    private ImageView mBackButtonFind;
+    private Button mCopyButton;                 //variable for the copy funcitonality
+    private Button mSpeakButton;                //variable for the speak button
+    private TextToSpeech tts;
 
     // buttons for user interface
     private Button mNewPictureButton, mGoogleButton;
@@ -105,20 +113,19 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_find);
 
         example = MainActivity.selectedImage;
-
         someImage = MainActivity.example;
-
         mImageView = findViewById(R.id.imageView);
         mImageView.setImageURI(MainActivity.selectedImage);
-
         mSearchButton = findViewById(R.id.button);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
-        mTextView = findViewById(R.id.textView);
+        mEditText = findViewById(R.id.textSearch);
+        mCopyButton = findViewById(R.id.copy_button);
+        mSpeakButton = findViewById(R.id.text_to_speech_button);
+//        mTextView = findViewById(R.id.textView);
         mNewPictureButton = findViewById(R.id.new_picture);
         mGoogleButton = findViewById(R.id.google_button);
-        textViewInput =  findViewById(R.id.textView);
-//        textViewInput.addTextChangedListener(editWatcher);
-        textViewInput.setText("Hello");
+
+
         mNewPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,19 +133,27 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        mGoogleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                   try {
-                        Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
-                        String term = textViewInput.getText().toString();
-                        in.putExtra(SearchManager.QUERY, term);
-                        startActivity(in);
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }            }
-        });
 
+
+        /** TEXT TO SPEECH AREA **/
+        // Set up the Text tp speech engine
+        // TODO: Set up the Text To Speech engine.
+        TextToSpeech.OnInitListener listener =
+                new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(final int status) {
+                        if (status == TextToSpeech.SUCCESS) {
+                            Log.d("TTS", "Text to speech engine started successfully.");
+                            tts.setLanguage(Locale.US);
+                        } else {
+                            Log.d("TTS", "Error starting the text to speech engine.");
+                        }
+                    }
+                };
+        tts = new TextToSpeech(this.getApplicationContext(), listener);
+
+        /** BUTTONS **/
+        //search button press to run text recognition
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +161,37 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        // copy button press for the text recognition
+        mCopyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runTextRecognitionCopy();
+            }
+        });
+        mSpeakButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runTextRecognitionSpeak();
+            }
+        });
+        mGoogleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    runTextRecognitionGoogle();
+
+
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }            }
+        });
+
+
+        //-----Ideally wanna take this spinner out, but right now if you take it out, itll break the code
+        // because the bit bap is dependent on the adapter
+        // need to figure out a way to take out the spinner
         Spinner dropdown = findViewById(R.id.spinner);
+        dropdown.setVisibility(View.INVISIBLE);
         String[] items = new String[]{"Test Image 1 (Text)", "Test Image 2 (Text)", "Test Image 3" +
                 " (Text)", "Test Image 4 (Text)", "Text Image 5 (Text)"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout
@@ -154,7 +199,167 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         dropdown.setAdapter(adapter);
         dropdown.setOnItemSelectedListener(this);
 
-    }
+    } // end onCreate
+
+    /**--------------------------------- TEXT RECOGNITION AREA ----------------------------------------------------**/
+
+    /** SECTION FOR THE SPEAK TEXT RECOGNITION **/
+    private void runTextRecognitionGoogle() {
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mSelectedImage);
+        FirebaseVisionTextRecognizer recognizer = FirebaseVision.getInstance()
+                .getOnDeviceTextRecognizer();
+        mGoogleButton.setEnabled(false);
+        recognizer.processImage(image)
+                .addOnSuccessListener(
+                        new OnSuccessListener<FirebaseVisionText>() {
+                            @Override
+                            public void onSuccess(FirebaseVisionText texts) {
+                                mGoogleButton.setEnabled(true);
+                                processTextRecognitionResultGoogle(texts);
+                            }
+                        })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Task failed with an exception
+                                mGoogleButton.setEnabled(true);
+                                e.printStackTrace();
+                            }
+                        });
+    } // end runTextRecognitionSpeak
+
+    private void processTextRecognitionResultGoogle(FirebaseVisionText texts) {
+        List<FirebaseVisionText.TextBlock> blocks = texts.getTextBlocks();
+        if (blocks.size() == 0) {
+            showToast("No text found");
+            return;
+        }
+        mGraphicOverlay.clear();  //this clears the overlay of the graphics
+        String sentence = "";  //added variable for the sentence
+
+        for (int i = 0; i < blocks.size(); i++) {
+            List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
+            for (int j = 0; j < lines.size(); j++) {
+                List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
+                for (int k = 0; k < elements.size(); k++) {
+                    //Here is where we find the words that have finished post processing and we just have to concatenate everthing into a strin
+                    sentence = sentence + elements.get(k).getText() + " ";  //sentence variable now has the recognized text in here
+                }
+            }
+        }
+        Log.i(TAG, sentence);  //this will log the current sentence to check if the sentence is being recognized correctly.
+        Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
+        in.putExtra(SearchManager.QUERY, sentence);
+        startActivity(in);
+
+    } // end processTextRecognitionResultsSpeak
+
+    private void runTextRecognitionSpeak() {
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mSelectedImage);
+        FirebaseVisionTextRecognizer recognizer = FirebaseVision.getInstance()
+                .getOnDeviceTextRecognizer();
+        mSpeakButton.setEnabled(false);
+        recognizer.processImage(image)
+                .addOnSuccessListener(
+                        new OnSuccessListener<FirebaseVisionText>() {
+                            @Override
+                            public void onSuccess(FirebaseVisionText texts) {
+                                mSpeakButton.setEnabled(true);
+                                processTextRecognitionResultSpeak(texts);
+                            }
+                        })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Task failed with an exception
+                                mSpeakButton.setEnabled(true);
+                                e.printStackTrace();
+                            }
+                        });
+    } // end runTextRecognitionSpeak
+
+    private void processTextRecognitionResultSpeak(FirebaseVisionText texts) {
+        List<FirebaseVisionText.TextBlock> blocks = texts.getTextBlocks();
+        if (blocks.size() == 0) {
+            showToast("No text found");
+            return;
+        }
+        mGraphicOverlay.clear();  //this clears the overlay of the graphics
+        String sentence = "";  //added variable for the sentence
+
+        for (int i = 0; i < blocks.size(); i++) {
+            List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
+            for (int j = 0; j < lines.size(); j++) {
+                List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
+                for (int k = 0; k < elements.size(); k++) {
+                    //Here is where we find the words that have finished post processing and we just have to concatenate everthing into a strin
+                    sentence = sentence + elements.get(k).getText() + " ";  //sentence variable now has the recognized text in here
+                }
+            }
+        }
+        Log.i(TAG, sentence);  //this will log the current sentence to check if the sentence is being recognized correctly.
+        tts.speak(sentence, TextToSpeech.QUEUE_ADD, null, "DEFAULT");
+    } // end processTextRecognitionResultsSpeak
+
+    /** SECTION FOR THE COPY TEXT RECOGNITION **/
+    private void runTextRecognitionCopy() {
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mSelectedImage);
+        FirebaseVisionTextRecognizer recognizer = FirebaseVision.getInstance()
+                .getOnDeviceTextRecognizer();
+        mCopyButton.setEnabled(false);
+        recognizer.processImage(image)
+                .addOnSuccessListener(
+                        new OnSuccessListener<FirebaseVisionText>() {
+                            @Override
+                            public void onSuccess(FirebaseVisionText texts) {
+                                mCopyButton.setEnabled(true);
+                                processTextRecognitionResultCopy(texts);
+                            }
+                        })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Task failed with an exception
+                                mCopyButton.setEnabled(true);
+                                e.printStackTrace();
+                            }
+                        });
+    } // end runTextRecognitionCopy
+
+    private void processTextRecognitionResultCopy(FirebaseVisionText texts) {
+        List<FirebaseVisionText.TextBlock> blocks = texts.getTextBlocks();
+        if (blocks.size() == 0) {
+            showToast("No text found");
+            return;
+        }
+        mGraphicOverlay.clear();  //this clears the overlay of the graphics
+        String sentence = "";  //added variable for the sentence
+
+        for (int i = 0; i < blocks.size(); i++) {
+            List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
+            for (int j = 0; j < lines.size(); j++) {
+                List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
+                for (int k = 0; k < elements.size(); k++) {
+                    //Here is where we find the words that have finished post processing and we just have to concatenate everthing into a strin
+                    sentence = sentence + elements.get(k).getText() + " ";  //sentence variable now has the recognized text in here
+
+                }
+            }
+        }
+
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("copiedText",sentence);
+        clipboard.setPrimaryClip(clip);
+
+        Log.i(TAG, sentence);  //this will log the current sentence to check if the sentence is being recognized correctly.
+
+        showToast("Successfully copied to clipboard:" + sentence);
+    } // end processTextRecognitionResultsCopy
+
+    /** SECTION FOR THE SEARCH TEXT RECOGNITION **/
 
     private void runTextRecognition() {
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mSelectedImage);
@@ -189,24 +394,27 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         mGraphicOverlay.clear();  //this clears the overlay of the graphics
         String sentence = "";  //added variable for the sentence
-        String word = "Walk"; //used to check if the word is present
+
+        String word =  mEditText.getText().toString(); //used to check if the word is present
+        word = word.toLowerCase();
+
         for (int i = 0; i < blocks.size(); i++) {
             List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
             for (int j = 0; j < lines.size(); j++) {
                 List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
                 for (int k = 0; k < elements.size(); k++) {
                     //---- This code now here vvv will create a graphic text overlay that will and over each word that is found.
-                    Graphic textGraphic = new TextGraphic(mGraphicOverlay, elements.get(k));
-                    mGraphicOverlay.add(textGraphic);
+                    //Graphic textGraphic = new TextGraphic(mGraphicOverlay, elements.get(k));
+                    //mGraphicOverlay.add(textGraphic);
 
-                    /* this code implements the search function and overlays a red box if the word is found
+                    //this code implements the search function and overlays a red box if the word is found
                     String tempWord = elements.get(k).getText();
+                    tempWord = tempWord.toLowerCase();
                     if(tempWord.equals(word))
                     {
                         Graphic textGraphic = new TextGraphic(mGraphicOverlay, elements.get(k));
                         mGraphicOverlay.add(textGraphic);
                     }
-                    */
 
                     //Here is where we find the words that have finished post processing and we just have to concatenate everthing into a strin
                     sentence = sentence + elements.get(k).getText() + " ";  //sentence variable now has the recognized text in here
@@ -216,9 +424,16 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         Log.i(TAG, sentence);  //this will log the current sentence to check if the sentence is being recognized correctly.
-        mTextView.setText(sentence); //this will put the sentence into the text view
+        Log.i(TAG, word);
+      //  mEditText.setText(sentence); //this will put the sentence into the text view
+
+        if(word.equals(""))
+        {
+            showToast("No search text was provided");
+        }
     }
 
+    /**--------------------------------------------- END TEXT RECOGNITION AREA -----------------------------------------------------------------**/
 
     /**
      * Writes Image data into a {@code ByteBuffer}.
@@ -263,7 +478,6 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
             // rendering time.
             mImageMaxWidth = mImageView.getWidth();
         }
-
         return mImageMaxWidth;
     }
 
@@ -275,10 +489,8 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
             // wait for
             // a UI layout pass to get the right values. So delay it to first time image
             // rendering time.
-            mImageMaxHeight =
-                    mImageView.getHeight();
+            mImageMaxHeight = mImageView.getHeight();
         }
-
         return mImageMaxHeight;
     }
 
@@ -294,28 +506,8 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+
         mGraphicOverlay.clear();
-        switch (position) {
-            case 0:
-                mSelectedImage = getBitmapFromAsset(this, "grass.jpg");
-                break;
-            case 1:
-                // Whatever you want to happen when the thrid item gets selected
-                mSelectedImage = getBitmapFromAsset(this, "meme.jpg");
-                break;
-            case 2:
-                // Whatever you want to happen when the thrid item gets selected
-                mSelectedImage = getBitmapFromAsset(this, "textMessage.jpg");
-                break;
-            case 3:
-                // Whatever you want to happen when the thrid item gets selected
-                mSelectedImage = getBitmapFromAsset(this, "sign.jpg");
-                break;
-            case 4:
-                mSelectedImage = getBitmapFromAsset(this, "Android.png");
-
-        }
-
         mSelectedImage = someImage;
 
         if (mSelectedImage != null) {
@@ -337,9 +529,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
                             (int) (mSelectedImage.getWidth() / scaleFactor),
                             (int) (mSelectedImage.getHeight() / scaleFactor),
                             true);
-
-          //  mImageView.setImageBitmap(resizedBitmap);
-
+            mImageView.setImageBitmap(resizedBitmap);
             mSelectedImage = resizedBitmap;
         }
     }
@@ -351,7 +541,6 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public static Bitmap getBitmapFromAsset(Context context, String filePath) {
         AssetManager assetManager = context.getAssets();
-
         InputStream is;
         Bitmap bitmap = null;
         try {
@@ -360,10 +549,6 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return bitmap;
     }
-
-
-
 }

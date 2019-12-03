@@ -10,32 +10,32 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="500dp"
-        android:contentDescription="@string/image_for_textrec"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitStart"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:contentDescription="@string/image_for_textrec" />
 
 
     <com.example.searchscreen.GraphicOverlay
         android:id="@+id/graphicOverlay"
-        android:layout_width="0dp"
-        android:layout_height="500dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentStart="true"
+        app:layout_constraintBottom_toBottomOf="@id/imageView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@id/imageView"
+        app:layout_constraintRight_toRightOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/imageView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="407dp"
-        android:layout_height="52dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="4dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
@@ -82,6 +82,10 @@
         app:layout_constraintLeft_toRightOf="@id/text_to_speech_button"
         />
 
+
+    <!--************END USER INTERFACE***************-->
+
+
     <Button
         android:id="@+id/new_picture"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -90,23 +94,32 @@
         android:layout_height="55dp"
         android:text="New Picture"
         />
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/cardview_dark_background"-->
+<!--        android:text="TextView"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/textSearch"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.484"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintVertical_bias="1.0" />-->
 
-    <!--************END USER INTERFACE***************-->
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="86dp"
-        android:layout_marginBottom="40dp"
-        android:text="TextView"
+    <EditText
+        android:id="@+id/textSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/cardview_light_background"
+        android:ems="10"
+        android:hint="Search for words"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/graphicOverlay"
-        app:layout_constraintVertical_bias="1.0" />
-
-
+        app:layout_constraintVertical_bias="0.841" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

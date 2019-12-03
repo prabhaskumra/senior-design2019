@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -88,6 +89,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     // A TextToSpeech engine for speaking a String value.
     private TextToSpeech tts;
     private EditText oLiveSearch;
+
+    private Button mGoogleButton, mCopyButton, mSpeakButton;
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -100,6 +103,23 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         graphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
         oLiveSearch =  findViewById(R.id.liveSearch);
         oLiveSearch.addTextChangedListener(ocrEditWatcher);
+
+        mGoogleButton = findViewById(R.id.google_button);
+        mCopyButton = findViewById(R.id.copy_button);
+        mSpeakButton = findViewById(R.id.text_to_speech_button);
+
+        mGoogleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
+                    String term = oLiveSearch.getText().toString();
+                    in.putExtra(SearchManager.QUERY, term);
+                    startActivity(in);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }            }
+        });
 
         // Set good defaults for capturing text.
         boolean autoFocus = true;
@@ -122,16 +142,16 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 .show();
 
         Button showFunctionsButtonOCR, newPictureButtonOCR;
-        showFunctionsButtonOCR = findViewById(R.id.show_functions_OCR);
+//        showFunctionsButtonOCR = findViewById(R.id.show_functions_OCR);
         newPictureButtonOCR = findViewById(R.id.new_picture_OCR);
-        showFunctionsButtonOCR.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-//                MainActivity.fun
-            }
-
-        }); // end showFunctionsButtonsOCR
+//        showFunctionsButtonOCR.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+////                MainActivity.fun
+//            }
+//
+//        }); // end showFunctionsButtonsOCR
 
         newPictureButtonOCR.setOnClickListener(new View.OnClickListener() {
 

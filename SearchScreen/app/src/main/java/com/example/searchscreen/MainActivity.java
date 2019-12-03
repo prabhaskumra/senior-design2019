@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Build;
@@ -52,15 +53,12 @@ public class MainActivity extends AppCompatActivity {
     public static Uri selectedImage;
     public static Bitmap example;
 
-    Camera camera;
-    FrameLayout frameLayout;
     ImageView mImageView;
-    ShowCamera showCamera;
     public static Button mCaptureBtn;
     public static Button mFromPhotos;
     public static Button showFunctions;
     public static Button openLiveOCR;
-    Uri image_uri;
+    public static Uri image_uri;
 
     public static ImageButton tutorialButton;
 
@@ -163,7 +161,11 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case IMAGE_CAPTURE_CODE:
                 if (resultCode == RESULT_OK) {
-                    mImageView.setImageURI(image_uri);
+                  mImageView.setImageURI(image_uri);
+                    BitmapDrawable drawable = (BitmapDrawable) mImageView.getDrawable();
+                    example = drawable.getBitmap();
+
+//                    mImageView.setImageURI(selectedImage);
                 }
                 break;
             case GALLERY_REQUEST_CODE:
@@ -172,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                 //      mImageView.setImageURI(image_uri);
                 //  }
                 selectedImage = data.getData();
-//                Uri selectedImage = data.getData();
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
                 cursor.moveToFirst();
@@ -181,10 +182,8 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
               //  mImageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
 
-             //   mImageView.setImageURI(selectedImage);
+                mImageView.setImageURI(selectedImage);
                 example =  BitmapFactory.decodeFile(imgDecodableString);
-    //            FindActivity.mImageView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
-
 
                 break;
             default:
@@ -192,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
         } // end switch statement
 
-
+        mImageView.setImageResource(R.drawable.homescreen);
         openFindActivity();
 
     } // end onActivityResult
@@ -210,8 +209,6 @@ public class MainActivity extends AppCompatActivity {
         mCaptureBtn = findViewById(R.id.capture_image_btn);
         mFromPhotos = findViewById(R.id.from_photos);
         openLiveOCR = findViewById(R.id.live_ocr);
-        //  this function will open OCR screen when live OCR button is clicked
-
         tutorialButton.setVisibility(View.VISIBLE);
         openLiveOCR.setOnClickListener(new View.OnClickListener() {
 
