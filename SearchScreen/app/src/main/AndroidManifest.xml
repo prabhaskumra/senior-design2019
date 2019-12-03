@@ -37,7 +37,9 @@
         <activity android:name=".FindActivity"></activity>
 
         <activity android:name=".GoogleSearchIntentActivity"></activity>
-        <activity android:name=".OcrCaptureActivity"></activity>
+        <activity android:name=".OcrCaptureActivity" android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
 
         <activity
             android:name=".MainActivity"

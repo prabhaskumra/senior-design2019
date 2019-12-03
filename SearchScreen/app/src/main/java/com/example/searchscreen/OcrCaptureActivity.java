@@ -22,6 +22,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.SearchManager;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -101,8 +103,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         preview = (CameraSourcePreview) findViewById(R.id.preview);
         graphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
-        oLiveSearch =  findViewById(R.id.liveSearch);
-        oLiveSearch.addTextChangedListener(ocrEditWatcher);
+        //oLiveSearch =  findViewById(R.id.liveSearch);
+        //oLiveSearch.addTextChangedListener(ocrEditWatcher);
 
 //        mGoogleButton = findViewById(R.id.google_button);
 //        mCopyButton = findViewById(R.id.copy_button);
@@ -137,13 +139,13 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        Snackbar.make(graphicOverlay, "Tap to Speak. Pinch/Stretch to zoom",
+        Snackbar.make(graphicOverlay, "Tap to Copy. Pinch/Stretch to zoom",
                 Snackbar.LENGTH_LONG)
                 .show();
 
         Button showFunctionsButtonOCR, newPictureButtonOCR;
 //        showFunctionsButtonOCR = findViewById(R.id.show_functions_OCR);
-        newPictureButtonOCR = findViewById(R.id.new_picture_OCR);
+        newPictureButtonOCR = findViewById(R.id.new_picture);
 //        showFunctionsButtonOCR.setOnClickListener(new View.OnClickListener() {
 //
 //            @Override
@@ -416,7 +418,16 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             if (text != null && text.getValue() != null) {
                 Log.d(TAG, "text data is being spoken! " + text.getValue());
                 // Speak the string.
-                tts.speak(text.getValue(), TextToSpeech.QUEUE_ADD, null, "DEFAULT");
+                //tts.speak(text.getValue(), TextToSpeech.QUEUE_ADD, null, "DEFAULT");
+
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("copiedText",text.getValue());
+                clipboard.setPrimaryClip(clip);
+
+                Snackbar.make(graphicOverlay,"Copied!",
+                        Snackbar.LENGTH_LONG)
+                        .show();
+
             }
             else {
                 Log.d(TAG, "text data is null");
