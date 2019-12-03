@@ -104,22 +104,22 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         oLiveSearch =  findViewById(R.id.liveSearch);
         oLiveSearch.addTextChangedListener(ocrEditWatcher);
 
-        mGoogleButton = findViewById(R.id.google_button);
-        mCopyButton = findViewById(R.id.copy_button);
-        mSpeakButton = findViewById(R.id.text_to_speech_button);
+//        mGoogleButton = findViewById(R.id.google_button);
+//        mCopyButton = findViewById(R.id.copy_button);
+//        mSpeakButton = findViewById(R.id.text_to_speech_button);
 
-        mGoogleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
-                    String term = oLiveSearch.getText().toString();
-                    in.putExtra(SearchManager.QUERY, term);
-                    startActivity(in);
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }            }
-        });
+//        mGoogleButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    Intent in = new Intent(Intent.ACTION_WEB_SEARCH);
+//                    String term = oLiveSearch.getText().toString();
+//                    in.putExtra(SearchManager.QUERY, term);
+//                    startActivity(in);
+//                } catch (Exception e) {
+//                    // TODO: handle exception
+//                }            }
+//        });
 
         // Set good defaults for capturing text.
         boolean autoFocus = true;

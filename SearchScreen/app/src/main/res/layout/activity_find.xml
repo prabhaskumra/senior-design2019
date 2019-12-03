@@ -49,7 +49,9 @@
     android:id="@+id/button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/search_text_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+    android:text="Search"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -58,6 +60,8 @@
         android:id="@+id/google_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:drawableLeft="@drawable/ic_language_black_24dp"
         android:text="Google"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/button"
@@ -67,6 +71,8 @@
         android:id="@+id/text_to_speech_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:drawableLeft="@drawable/ic_volume_up_black_24dp"
         android:text="Speak"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/google_button"
@@ -77,6 +83,8 @@
         android:id="@+id/copy_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:drawableLeft="@drawable/ic_content_copy_black_24dp"
         android:text="Copy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/text_to_speech_button"
@@ -90,9 +98,11 @@
         android:id="@+id/new_picture"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:drawableLeft="@drawable/ic_home_black_24dp"
         android:layout_width="108dp"
         android:layout_height="55dp"
-        android:text="New Picture"
+        android:text=""
         />
 <!--    <TextView-->
 <!--        android:id="@+id/textView"-->
