@@ -93,10 +93,9 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private TextToSpeech tts;
     private EditText searchWord;
     private Button msearchButton;
-    String word;
+    private Button mCopyButton;
+    String word = "";
     Boolean useSearchGraphic;
-
-    private Button mGoogleButton, mCopyButton, mSpeakButton;
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -110,11 +109,13 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         graphicOverlaySearch = (GraphicOverlay<OcrGraphicSearch>) findViewById(R.id.graphicOverlay);
         msearchButton = findViewById(R.id.searchButton);
         searchWord = findViewById(R.id.searchWord);
+        mCopyButton = findViewById(R.id.copy_button);
+
         //oLiveSearch =  findViewById(R.id.liveSearch);
         //oLiveSearch.addTextChangedListener(ocrEditWatcher);
 
 //        mGoogleButton = findViewById(R.id.google_button);
-//        mCopyButton = findViewById(R.id.copy_button);
+
 //        mSpeakButton = findViewById(R.id.text_to_speech_button);
 
 //        mGoogleButton.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +147,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        Snackbar.make(graphicOverlay, "Tap to Copy. Pinch/Stretch to zoom",
+        Snackbar.make(graphicOverlay, "Tap to Copy. Pinch/Stretch to zoom. Type word to search",
                 Snackbar.LENGTH_LONG)
                 .show();
 
@@ -178,13 +179,22 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         msearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext(); //get context of the app
-                //try to restart camera view;
-
-
+                //try to restart camera view
                 onPause(); //pause the camera
 
                 createNewCameraSource(autoFocus, useFlash);
+
+                onResume(); //resume the camera with a new graphic overlay set
+            }
+        });
+
+        mCopyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //try to restart camera view
+                onPause(); //pause the camera
+
+                createCameraSource(autoFocus, useFlash);
 
                 onResume(); //resume the camera with a new graphic overlay set
             }
@@ -313,7 +323,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 new CameraSource.Builder(getApplicationContext(), textRecognizer)
                         .setFacing(CameraSource.CAMERA_FACING_BACK)
                         .setRequestedPreviewSize(1280, 1024)
-                        .setRequestedFps(2.0f)
+                        .setRequestedFps(15.0f)
                         .setFlashMode(useFlash ? Camera.Parameters.FLASH_MODE_TORCH : null)
                         .setFocusMode(autoFocus ? Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO : null)
                         .build();

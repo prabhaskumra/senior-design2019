@@ -41,6 +41,7 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
     OcrDetectorProcessor(GraphicOverlay<OcrGraphicSearch> ocrGraphicOverlay, String word) {
         graphicOverlaySearch = ocrGraphicOverlay;
         searchText = word;
+        searchText = searchText.toLowerCase();  //make sure that it always check lowers case strings
         search = true;
         Log.i("Word was passed", searchText);
     }
@@ -88,6 +89,7 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
                         //extract scanned text words here
                         Log.v("element", element.getValue());
                         String tempWord = element.getValue();
+                        tempWord = tempWord.toLowerCase();
                         if(tempWord.equals(searchText))
                         {
                             OcrGraphicSearch graphic = new OcrGraphicSearch(graphicOverlaySearch, element);

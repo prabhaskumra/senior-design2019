@@ -24,6 +24,7 @@ import android.graphics.RectF;
 import com.example.searchscreen.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
+import android.util.Log;
 
 import java.util.List;
 
@@ -105,9 +106,9 @@ public class OcrGraphicSearch extends GraphicOverlay.Graphic {
         canvas.drawRect(rect, rectPaint);
 
 
-            float left = translateX(searchText.getBoundingBox().left);
-            float bottom = translateY(searchText.getBoundingBox().bottom);
-            canvas.drawText(searchText.getValue(), left, bottom, textPaint);
+            //float left = translateX(searchText.getBoundingBox().left) +50;
+            //float bottom = translateY(searchText.getBoundingBox().bottom) - 100;
+            //canvas.drawText(searchText.getValue(), left, bottom, textPaint);
 
     }
 }

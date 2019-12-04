@@ -396,7 +396,7 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         String sentence = "";  //added variable for the sentence
 
         String word =  mEditText.getText().toString(); //used to check if the word is present
-        word = word.toLowerCase();
+        word = word.toLowerCase();                      //always check the lower case words;
 
         for (int i = 0; i < blocks.size(); i++) {
             List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();

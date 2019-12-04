@@ -211,6 +211,10 @@ public class CameraSource {
             if ((width <= 0) || (width > MAX) || (height <= 0) || (height > MAX)) {
                 throw new IllegalArgumentException("Invalid preview size: " + width + "x" + height);
             }
+
+            Log.d("camerasource", "width " + Integer.toString(width));
+            Log.d("camerasource", "height " + Integer.toString(height));
+
             cameraSource.requestedPreviewWidth = width;
             cameraSource.requestedPreviewHeight = height;
             return this;

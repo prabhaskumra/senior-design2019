@@ -24,6 +24,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.google.android.gms.vision.CameraSource;
+import android.util.Log;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -49,11 +50,14 @@ import java.util.Set;
 public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
     private final Object lock = new Object();
     private int previewWidth;
-    private float widthScaleFactor = 1.0f;
+    //private float widthScaleFactor = 1.0f;
     private int previewHeight;
-    private float heightScaleFactor = 1.0f;
+    //private float heightScaleFactor = 1.0f;
     private int facing = CameraSource.CAMERA_FACING_BACK;
     private Set<T> graphics = new HashSet<>();
+    private float widthScaleFactor = 1.4125f;
+    private float heightScaleFactor = 1.4125f;
+
 
     /**
      * Base class for a custom graphics object to be rendered within the graphic overlay.  Subclass
@@ -62,9 +66,13 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
      */
     public static abstract class Graphic {
         private GraphicOverlay mOverlay;
+        //mOverlay.widthScaleFactor = 1.4125f;
+        //mOverlay.heightScaleFactor = 1.4125f;
 
         public Graphic(GraphicOverlay overlay) {
             mOverlay = overlay;
+            mOverlay.widthScaleFactor = 1.4125f;
+            mOverlay.heightScaleFactor = 1.4125f;
         }
 
         /**
@@ -128,10 +136,31 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
         public RectF translateRect(RectF inputRect) {
             RectF returnRect = new RectF();
 
-            returnRect.left = translateX(inputRect.left);
-            returnRect.top = translateY(inputRect.top);
-            returnRect.right = translateX(inputRect.right);
-            returnRect.bottom = translateY(inputRect.bottom);
+            returnRect.left = translateX(inputRect.left) ;
+            returnRect.top = translateY(inputRect.top)  ;
+            returnRect.right = translateX(inputRect.right)  ;
+            returnRect.bottom = translateY(inputRect.bottom) ;
+
+            /*
+            returnRect.left = translateX(inputRect.left) +50 ;
+            returnRect.top = translateY(inputRect.top) - 100 ;
+            returnRect.right = translateX(inputRect.right) + 250 ;
+            returnRect.bottom = translateY(inputRect.bottom) - 100;
+
+             */
+
+            Log.d("rectangle", "inputrectangleL " + Float.toString(inputRect.left));
+            Log.d("rectangle", "rectangleL " + Float.toString(returnRect.left));
+            Log.d("rectangle", "inputrectangleR " + Float.toString(inputRect.right));
+            Log.d("rectangle", "rectangleR " + Float.toString(returnRect.right));
+            Log.d("rectangle", "inputrectangleT " + Float.toString(inputRect.top));
+            Log.d("rectangle", "rectangleT " + Float.toString(returnRect.top));
+            Log.d("rectangle", "inputrectangleB " + Float.toString(inputRect.bottom));
+            Log.d("rectangle", "rectangleB " + Float.toString(returnRect.bottom));
+
+            Log.d("rectangle", "overlay " + Integer.toString(mOverlay.getWidth()));
+            Log.d("rectangle", "overlay " + Float.toString(mOverlay.widthScaleFactor));
+            Log.d("rectangle", "overlay " + Float.toString(mOverlay.heightScaleFactor));
 
             return returnRect;
         }
@@ -216,8 +245,8 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
 
         synchronized (lock) {
             if ((previewWidth != 0) && (previewHeight != 0)) {
-                widthScaleFactor = (float) canvas.getWidth() / (float) previewWidth;
-                heightScaleFactor = (float) canvas.getHeight() / (float) previewHeight;
+                //widthScaleFactor = (float) canvas.getWidth() / (float) previewWidth;
+                //heightScaleFactor = (float) canvas.getHeight() / (float) previewHeight;
             }
 
             for (Graphic graphic : graphics) {

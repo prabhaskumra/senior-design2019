@@ -118,6 +118,7 @@ public class CameraSourcePreview extends ViewGroup {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         int previewWidth = 320;
         int previewHeight = 240;
+        bottom = 1808; // hardcode bottom because to adjust?
         if (cameraSource != null) {
             Size size = cameraSource.getPreviewSize();
             if (size != null) {
@@ -125,6 +126,13 @@ public class CameraSourcePreview extends ViewGroup {
                 previewHeight = size.getHeight();
             }
         }
+        Log.d("previewWidth", "Preview width is " + Integer.toString(previewWidth));
+        Log.d("previewWidth", "Preview height is " + Integer.toString(previewHeight));
+        Log.d("previewWidth", "left " + Integer.toString(left));
+        Log.d("previewWidth", "top " + Integer.toString(top));
+        Log.d("previewWidth", "right " + Integer.toString(right));
+        Log.d("previewWidth", "bottom " + Integer.toString(bottom));
+
 
         // Swap width and height sizes when in portrait, since it will be rotated 90 degrees
         if (isPortraitMode()) {
@@ -156,6 +164,11 @@ public class CameraSourcePreview extends ViewGroup {
             childHeight = viewHeight;
             childXOffset = (childWidth - viewWidth) / 2;
         }
+        Log.d("previewWidth", "WR " + Float.toString(widthRatio));
+        Log.d("previewWidth", "HR " + Float.toString(heightRatio));
+        Log.d("previewWidth", "CW " + Integer.toString(childWidth));
+        Log.d("previewWidth", "CH " + Integer.toString(childWidth));
+        Log.d("previewWidth", "CY " + Integer.toString(childYOffset));
 
         for (int i = 0; i < getChildCount(); ++i) {
             // One dimension will be cropped.  We shift child over or up by this offset and adjust
