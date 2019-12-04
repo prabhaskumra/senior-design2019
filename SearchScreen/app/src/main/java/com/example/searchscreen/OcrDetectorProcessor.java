@@ -22,19 +22,28 @@ import android.util.SparseArray;
 import com.example.searchscreen.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
-
+import com.google.android.gms.vision.text.Text;
 /**
  * A very simple Processor which gets detected TextBlocks and adds them to the overlay
  * as OcrGraphics.
  */
 public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
 
+    String searchText;
     private GraphicOverlay<OcrGraphic> graphicOverlay;
+    private GraphicOverlay<OcrGraphicSearch> graphicOverlaySearch;
+    Boolean search = false;
 
     OcrDetectorProcessor(GraphicOverlay<OcrGraphic> ocrGraphicOverlay) {
         graphicOverlay = ocrGraphicOverlay;
     }
 
+    OcrDetectorProcessor(GraphicOverlay<OcrGraphicSearch> ocrGraphicOverlay, String word) {
+        graphicOverlaySearch = ocrGraphicOverlay;
+        searchText = word;
+        search = true;
+        Log.i("Word was passed", searchText);
+    }
     /**
      * Called by the detector to deliver detection results.
      * If your application called for it, this could be a place to check for
@@ -44,16 +53,51 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
      */
     @Override
     public void receiveDetections(Detector.Detections<TextBlock> detections) {
-        graphicOverlay.clear();
+        if(search == false)
+        {
+            graphicOverlay.clear();
+        }
+        else if(search == true)
+        {
+            graphicOverlaySearch.clear();
+        }
+
         SparseArray<TextBlock> items = detections.getDetectedItems();
-        for (int i = 0; i < items.size(); ++i) {
-            TextBlock item = items.valueAt(i);
-            if (item != null && item.getValue() != null) {
-                Log.d("OcrDetectorProcessor", "Text detected! " + item.getValue());
-                OcrGraphic graphic = new OcrGraphic(graphicOverlay, item);
-                graphicOverlay.add(graphic);
+
+        if(search == false)
+        {
+            for (int i = 0; i < items.size(); ++i) {
+                //(searchText != null)
+                //Log.i("word was passed", searchText);
+                TextBlock item = items.valueAt(i);
+                if (item != null && item.getValue() != null) {
+                    Log.d("OcrDetectorProcessor", "Text detected! " + item.getValue());
+                    OcrGraphic graphic = new OcrGraphic(graphicOverlay, item);
+                    graphicOverlay.add(graphic);
+                }
             }
         }
+        else if(search == true);
+        {
+            for (int i = 0; i < items.size(); i++) {
+                TextBlock item = items.valueAt(i);
+                for (Text line : item.getComponents()) {
+                    //extract scanned text lines here
+                    //Log.v("lines", line.getValue());
+                    for (Text element : line.getComponents()) {
+                        //extract scanned text words here
+                        Log.v("element", element.getValue());
+                        String tempWord = element.getValue();
+                        if(tempWord.equals(searchText))
+                        {
+                            OcrGraphicSearch graphic = new OcrGraphicSearch(graphicOverlaySearch, element);
+                            graphicOverlaySearch.add(graphic);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     /**

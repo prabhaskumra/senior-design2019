@@ -10,63 +10,95 @@
     android:keepScreenOn="true"
     android:orientation="vertical">
 
+
     <com.example.searchscreen.ui.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.example.searchscreen.ui.camera.GraphicOverlay
             android:id="@+id/graphicOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </com.example.searchscreen.ui.camera.CameraSourcePreview>
 
+    </com.example.searchscreen.ui.camera.CameraSourcePreview>
 
     <Button
         android:id="@+id/new_picture"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="45dp"
+        android:layout_height="50dp"
         android:drawableLeft="@drawable/ic_home_black_24dp"
-        android:layout_width="108dp"
-        android:layout_height="55dp"
         android:text=""
-        />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/searchButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:text="Search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 
+    <EditText
+        android:id="@+id/searchWord"
+        android:layout_width="245dp"
+        android:layout_height="50dp"
+        android:hint="Search for word"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/searchButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.966" />
 
 
-<!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
+    <!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
 
-<!--    <Button-->
-<!--        android:id="@+id/google_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Google"-->
-<!--        android:layout_marginHorizontal="75dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        />-->
-<!--    -->
-<!--    <Button-->
-<!--        android:id="@+id/text_to_speech_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Speak"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toRightOf="@id/google_button"-->
-<!--        />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/google_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Google"-->
+    <!--        android:layout_marginHorizontal="75dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        />-->
+    <!--    -->
+    <!--    <Button-->
+    <!--        android:id="@+id/text_to_speech_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Speak"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/google_button"-->
+    <!--        />-->
 
 
-<!--    <Button-->
-<!--        android:id="@+id/copy_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Copy"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toRightOf="@id/text_to_speech_button"-->
-<!--        />-->
-<!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
+    <!--    <Button-->
+    <!--        android:id="@+id/copy_button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Copy"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toRightOf="@id/text_to_speech_button"-->
+    <!--        />-->
+    <!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

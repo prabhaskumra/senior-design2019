@@ -83,6 +83,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private CameraSource cameraSource;
     private CameraSourcePreview preview;
     private GraphicOverlay<OcrGraphic> graphicOverlay;
+    private GraphicOverlay<OcrGraphicSearch> graphicOverlaySearch;
 
     // Helper objects for detecting taps and pinches.
     private ScaleGestureDetector scaleGestureDetector;
@@ -90,7 +91,10 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
     // A TextToSpeech engine for speaking a String value.
     private TextToSpeech tts;
-    private EditText oLiveSearch;
+    private EditText searchWord;
+    private Button msearchButton;
+    String word;
+    Boolean useSearchGraphic;
 
     private Button mGoogleButton, mCopyButton, mSpeakButton;
     /**
@@ -103,6 +107,9 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         preview = (CameraSourcePreview) findViewById(R.id.preview);
         graphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
+        graphicOverlaySearch = (GraphicOverlay<OcrGraphicSearch>) findViewById(R.id.graphicOverlay);
+        msearchButton = findViewById(R.id.searchButton);
+        searchWord = findViewById(R.id.searchWord);
         //oLiveSearch =  findViewById(R.id.liveSearch);
         //oLiveSearch.addTextChangedListener(ocrEditWatcher);
 
@@ -124,8 +131,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 //        });
 
         // Set good defaults for capturing text.
-        boolean autoFocus = true;
-        boolean useFlash = false;
+        final boolean autoFocus = true;
+        final boolean useFlash = false;
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -165,6 +172,23 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         }); // end newPictureButtonOCR
 
+
+
+        //This will reset the camera view and change the text of graphic overlay
+        msearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext(); //get context of the app
+                //try to restart camera view;
+
+
+                onPause(); //pause the camera
+
+                createNewCameraSource(autoFocus, useFlash);
+
+                onResume(); //resume the camera with a new graphic overlay set
+            }
+        });
 
 
         // Set up the Text To Speech engine.
@@ -251,6 +275,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     @SuppressLint("InlinedApi")
     private void createCameraSource(boolean autoFocus, boolean useFlash) {
         Context context = getApplicationContext();
+        useSearchGraphic = false; //this means that search graphicOverlay is not used,
 
         // A text recognizer is created to find text.  An associated multi-processor instance
         // is set to receive the text recognition results, track the text, and maintain
@@ -258,6 +283,53 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         // create a separate tracker instance for each text block.
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
         textRecognizer.setProcessor(new OcrDetectorProcessor(graphicOverlay));
+
+        if (!textRecognizer.isOperational()) {
+            // Note: The first time that an app using a Vision API is installed on a
+            // device, GMS will download a native libraries to the device in order to do detection.
+            // Usually this completes before the app is run for the first time.  But if that
+            // download has not yet completed, then the above call will not detect any text,
+            // barcodes, or faces.
+            //
+            // isOperational() can be used to check if the required native libraries are currently
+            // available.  The detectors will automatically become operational once the library
+            // downloads complete on device.
+            Log.w(TAG, "Detector dependencies are not yet available.");
+
+            // Check for low storage.  If there is low storage, the native library will not be
+            // downloaded, so detection will not become operational.
+            IntentFilter lowstorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
+            boolean hasLowStorage = registerReceiver(null, lowstorageFilter) != null;
+
+            if (hasLowStorage) {
+                Toast.makeText(this, R.string.low_storage_error, Toast.LENGTH_LONG).show();
+                Log.w(TAG, getString(R.string.low_storage_error));
+            }
+        }
+
+        // Creates and starts the camera.  Note that this uses a higher resolution in comparison
+        // to other detection examples to enable the text recognizer to detect small pieces of text.
+        cameraSource =
+                new CameraSource.Builder(getApplicationContext(), textRecognizer)
+                        .setFacing(CameraSource.CAMERA_FACING_BACK)
+                        .setRequestedPreviewSize(1280, 1024)
+                        .setRequestedFps(2.0f)
+                        .setFlashMode(useFlash ? Camera.Parameters.FLASH_MODE_TORCH : null)
+                        .setFocusMode(autoFocus ? Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO : null)
+                        .build();
+    }
+    @SuppressLint("InlinedApi")
+    private void createNewCameraSource(boolean autoFocus, boolean useFlash) {
+        Context context = getApplicationContext();
+        word = searchWord.getText().toString();
+        useSearchGraphic = true; //this means that search graphicOverlay is being used,
+
+        // A text recognizer is created to find text.  An associated multi-processor instance
+        // is set to receive the text recognition results, track the text, and maintain
+        // graphics for each text block on screen.  The factory is used by the multi-processor to
+        // create a separate tracker instance for each text block.
+        TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
+        textRecognizer.setProcessor(new OcrDetectorProcessor(graphicOverlaySearch,word));
 
         if (!textRecognizer.isOperational()) {
             // Note: The first time that an app using a Vision API is installed on a
@@ -394,7 +466,11 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         if (cameraSource != null) {
             try {
-                preview.start(cameraSource, graphicOverlay);
+                if(useSearchGraphic == false)
+                    preview.start(cameraSource, graphicOverlay);
+                else
+                    preview.start(cameraSource, graphicOverlaySearch);
+
             } catch (IOException e) {
                 Log.e(TAG, "Unable to start camera source.", e);
                 cameraSource.release();
