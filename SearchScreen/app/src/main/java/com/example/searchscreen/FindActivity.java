@@ -125,6 +125,10 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         mNewPictureButton = findViewById(R.id.new_picture);
         mGoogleButton = findViewById(R.id.google_button);
 
+        // hiding the Action bar AKA menu bar
+//        getActionBar().hide();
+
+        getSupportActionBar().hide();
 
         mNewPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
