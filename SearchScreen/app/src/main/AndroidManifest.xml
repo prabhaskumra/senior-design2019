@@ -35,11 +35,11 @@
 
         <activity android:name=".Tutorial"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".FindActivity"></activity>
+        <activity android:name=".FindActivity" android:windowSoftInputMode="stateHidden"></activity>
 
         <activity android:name=".GoogleSearchIntentActivity"></activity>
         <activity android:name=".OcrCaptureActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="stateHidden">
 
         </activity>
 
