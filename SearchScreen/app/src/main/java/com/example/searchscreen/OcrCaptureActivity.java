@@ -21,7 +21,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.SearchManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -32,12 +31,9 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -48,7 +44,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.example.searchscreen.ui.camera.CameraSource;
@@ -57,7 +52,6 @@ import com.example.searchscreen.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.io.IOException;
 import java.util.Locale;
 
@@ -111,8 +105,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         searchWord = findViewById(R.id.searchWord);
         mCopyButton = findViewById(R.id.copy_button);
 
-        //oLiveSearch =  findViewById(R.id.liveSearch);
-        //oLiveSearch.addTextChangedListener(ocrEditWatcher);
+
+        searchWord.addTextChangedListener(ocrEditWatcher);
 
 //        mGoogleButton = findViewById(R.id.google_button);
 

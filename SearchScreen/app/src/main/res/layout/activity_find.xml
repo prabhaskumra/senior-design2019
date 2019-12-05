@@ -65,7 +65,7 @@
     <Button
         android:id="@+id/google_button"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="98dp"
+        android:layout_width="110dp"
         android:layout_height="48dp"
         android:drawableLeft="@drawable/ic_language_black_24dp"
         android:text="Google"
@@ -76,7 +76,7 @@
     <Button
         android:id="@+id/text_to_speech_button"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="98dp"
+        android:layout_width="110dp"
         android:layout_height="48dp"
         android:drawableLeft="@drawable/ic_volume_up_black_24dp"
         android:text="Speak"

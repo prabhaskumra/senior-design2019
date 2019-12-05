@@ -26,7 +26,6 @@ import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 
 import java.util.List;
-import android.util.Log;
 /**
  * Graphic instance for rendering TextBlock position, size, and ID within an associated graphic
  * overlay view.
