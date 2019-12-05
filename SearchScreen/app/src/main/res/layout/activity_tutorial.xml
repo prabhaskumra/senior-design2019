@@ -25,5 +25,5 @@
         android:drawableLeft="@drawable/ic_home_black_24dp"
         android:text=""
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

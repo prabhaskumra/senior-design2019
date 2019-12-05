@@ -7,9 +7,9 @@
     android:id="@+id/topLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:keepScreenOn="true"
-    android:orientation="vertical"
-    android:background="#000000">
+    android:orientation="vertical">
 
 
     <com.example.searchscreen.ui.camera.CameraSourcePreview
@@ -44,48 +44,42 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:drawableLeft="@drawable/ic_search_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.05" />
+        app:layout_constraintStart_toEndOf="@id/searchWord" />
 
     <Button
         android:id="@+id/copy_button"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="8dp"
         android:drawableLeft="@drawable/ic_content_copy_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/searchButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.005" />
+        app:layout_constraintStart_toEndOf="@+id/searchButton" />
 
     <EditText
         android:id="@+id/searchWord"
         android:layout_width="234dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginBottom="12dp"
+        android:background="@color/cardview_light_background"
         android:hint="Search for word"
+        android:inputType="textPersonName"
         android:overScrollMode="always"
-        android:singleLine="false"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
-        android:inputType="textPersonName"
-        android:background="@color/cardview_light_background"
+        android:singleLine="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/searchButton"
-        app:layout_constraintHorizontal_bias=".99"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".99" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
 
@@ -119,28 +113,26 @@
     <!--        />-->
     <!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
 
-
-<!--
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/topLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:keepScreenOn="true">
-
-    <com.example.searchscreen.ui.camera.CameraSourcePreview
-        android:id="@+id/preview"
+    <!--
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/topLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:keepScreenOn="true">
 
-        <com.example.searchscreen.ui.camera.GraphicOverlay
-            android:id="@+id/graphicOverlay"
+        <com.example.searchscreen.ui.camera.CameraSourcePreview
+            android:id="@+id/preview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-    </com.example.searchscreen.ui.camera.CameraSourcePreview>
+            <com.example.searchscreen.ui.camera.GraphicOverlay
+                android:id="@+id/graphicOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-</LinearLayout>
--->
+        </com.example.searchscreen.ui.camera.CameraSourcePreview>
+
+    </LinearLayout>
+    -->

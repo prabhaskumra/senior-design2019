@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/full_activity_find2"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/full_activity_find2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FindActivity">
@@ -12,12 +11,12 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/image_for_textrec"
         android:scaleType="fitStart"
-        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:contentDescription="@string/image_for_textrec" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
 
     <com.example.searchscreen.GraphicOverlay
@@ -57,10 +56,6 @@
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
-
-
-    <!--************END USER INTERFACE***************-->
-
 
     <Button
         android:id="@+id/google_button"
@@ -107,33 +102,24 @@
         android:text=""
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<!--    <TextView-->
-<!--        android:id="@+id/textView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:backgroundTint="@color/cardview_dark_background"-->
-<!--        android:text="TextView"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/textSearch"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.484"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintVertical_bias="1.0" />-->
 
+
+    <!--************END USER INTERFACE***************-->
 
 
     <EditText
         android:id="@+id/textSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
         android:backgroundTint="@color/cardview_light_background"
         android:ems="10"
         android:hint="Search for words"
+        android:inputType="textPersonName"
         android:overScrollMode="always"
-        android:singleLine="false"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
-        android:background="@color/cardview_light_background"
-        android:inputType="textPersonName"
+        android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
@@ -141,3 +127,16 @@
         app:layout_constraintVertical_bias="0.841" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:backgroundTint="@color/cardview_dark_background"-->
+    <!--        android:text="TextView"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/textSearch"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.484"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="1.0" />-->
