@@ -8,7 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:keepScreenOn="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#000000">
 
 
     <com.example.searchscreen.ui.camera.CameraSourcePreview
@@ -51,37 +52,39 @@
         app:layout_constraintHorizontal_bias="0.802"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.05" />
 
     <Button
         android:id="@+id/copy_button"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="50dp"
         android:layout_height="50dp"
-
         android:drawableLeft="@drawable/ic_content_copy_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/searchButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.966" />
+        app:layout_constraintVertical_bias="1.005" />
 
     <EditText
         android:id="@+id/searchWord"
-        android:layout_width="245dp"
+        android:layout_width="234dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:hint="Search for word"
         android:overScrollMode="always"
+        android:singleLine="false"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
         android:inputType="textPersonName"
         android:background="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias=".99"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias=".99" />
 
 
     <!--&lt;!&ndash;*******************User Interface********************&ndash;&gt;-->
