@@ -175,7 +175,15 @@ public class FindActivity extends AppCompatActivity implements AdapterView.OnIte
         mSpeakButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                runTextRecognitionSpeak();
+
+                if(tts.isSpeaking())
+                {
+                    tts.stop();
+                }
+                else{
+                    runTextRecognitionSpeak();
+                }
+
             }
         });
         mGoogleButton.setOnClickListener(new View.OnClickListener() {
